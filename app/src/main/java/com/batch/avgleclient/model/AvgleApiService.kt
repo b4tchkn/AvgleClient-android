@@ -15,9 +15,9 @@ class AvgleApiService {
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build().create(AvgleApi::class.java)
 
-//    fun getAvCategories(): Deferred<Response<List<AvCategory>>> {
-//        return api.getAvCategories()
-//    }
+    fun getAvCategories(): Deferred<Response<List<AvCategory>>> {
+        return api.getAvCategories()
+    }
 
-    fun getAvCategories() = api.getAvCategories()
+//    fun getAvCategories() = api.getAvCategories()
 }

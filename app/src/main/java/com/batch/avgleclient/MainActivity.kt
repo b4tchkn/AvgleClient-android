@@ -2,10 +2,11 @@ package com.batch.avgleclient
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.batch.avgleclient.model.AvgleApiService
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.*
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,14 +16,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        CoroutineScope(Dispatchers.IO).launch{
+        avButton.setOnClickListener {
+            tappedAvButton()
+        }
+    }
+
+    private fun tappedAvButton() {
+        CoroutineScope(Dispatchers.Default).launch(handler) {
+            Log.d("batchTag", "kokko")
             val request = avService.getAvCategories()
+            Log.d("batchTag", "kokko")
             val response = request.await()
             if (response.isSuccessful) {
-                print(response.body())
+                Log.d("batchTag", "success")
             } else {
-                print(response.errorBody())
+                Log.d("batchTag", "false")
             }
         }
+    }
+
+    private val handler = CoroutineExceptionHandler { coroutineContext, throwable ->
+        Log.e("Exception", ":" + throwable)
     }
 }

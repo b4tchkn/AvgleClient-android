@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface AvgleApi {
     @GET("categories")
-    fun getAvCategories(): Deferred<Response<List<AvCategory>>>
+    fun getAvCategoriesAsync(): Deferred<Response<List<AvCategory>>>
 }

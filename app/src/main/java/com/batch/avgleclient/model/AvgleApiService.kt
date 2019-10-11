@@ -1,5 +1,6 @@
 package com.batch.avgleclient.model
 
+import android.util.Log
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
@@ -15,8 +16,9 @@ class AvgleApiService {
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build().create(AvgleApi::class.java)
 
-    fun getAvCategories(): Deferred<Response<List<AvCategory>>> {
-        return api.getAvCategories()
+    fun getAvCategoriesAsync(): Deferred<Response<List<AvCategory>>> {
+        Log.d("batchTag", "suspendの中")
+        return api.getAvCategoriesAsync()
     }
 
 //    fun getAvCategories() = api.getAvCategories()

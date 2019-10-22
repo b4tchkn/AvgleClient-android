@@ -1,16 +1,14 @@
-package com.batch.avgleclient
+package com.batch.avgleclient.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.batch.avgleclient.model.AvgleApiService
+import com.batch.avgleclient.R
+import com.batch.avgleclient.model.CategoryRepository
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
-
-    private val avService = AvgleApiService()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -21,16 +19,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun tappedAvButton() {
-        CoroutineScope(Dispatchers.IO).launch(handler) {
-            async(Dispatchers.Default) {
-                Log.d("batchTag", "kokko")
-                val request = avService.getAvCategoriesAsync()
-                val response = request.await()
-                if (response.isSuccessful) {
-                    Log.d("batchTag", "success")
-                } else {
-                    Log.d("batchTag", "false")
-                }
+        val service = CategoryRepository().getCategory()
+        CoroutineScope(Dispatchers.Default).launch {
+            val request = service.getAvCategories()
+            val response = request.await()
+            if (response.isSuccessful) {
+                print(response.body())
             }
         }
     }

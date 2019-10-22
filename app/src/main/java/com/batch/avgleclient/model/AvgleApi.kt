@@ -5,6 +5,9 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface AvgleApi {
-    @GET("categories")
-    fun getAvCategoriesAsync(): Deferred<Response<List<AvCategory>>>
+    companion object {
+        const val BASE_URL = "https://api.avgle.com/v1/"
+    }
+    @GET("/categories")
+    suspend fun getAvCategories(): Deferred<Response<List<AvCategory>>>
 }

@@ -8,6 +8,6 @@ interface AvgleApi {
     companion object {
         const val BASE_URL = "https://api.avgle.com/v1/"
     }
-    @GET("/categories")
-    suspend fun getAvCategories(): Deferred<Response<List<AvCategory>>>
+    @GET("categories")
+    suspend fun getAvCategories(): AvCategory
 }

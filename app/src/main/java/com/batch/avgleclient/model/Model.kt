@@ -10,17 +10,17 @@ data class AvCategory(
         val categories: List<Category>
     ) {
         data class Category(
-            @Json(name = "CHID")
+            @field:Json(name = "CHID")
             val chid: String,
             val name: String,
             val slug: String,
-            @Json(name = "total_videos")
+            @field:Json(name = "total_videos")
             val totalVideos: Int,
-            @Json(name = "shortname")
+            @field:Json(name = "shortname")
             val shortName: String,
-            @Json(name = "category_url")
+            @field:Json(name = "category_url")
             val categoryUrl: String,
-            @Json(name = "cover_url")
+            @field:Json(name = "cover_url")
             val coverUrl: String
         )
     }

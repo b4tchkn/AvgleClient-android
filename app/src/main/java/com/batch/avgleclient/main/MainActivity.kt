@@ -20,9 +20,10 @@ class MainActivity : AppCompatActivity() {
         collectionButton.setOnClickListener {
             tappedCollectionButton()
         }
+        videoButton.setOnClickListener {
+            tappedVideoButton()
+        }
     }
-
-    private val tag = "batchAV"
 
     private fun tappedCategoryButton() {
         val service = AvRepository().getRetrofit()
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         scope.launch {
             try {
                 val avCategories = service.getAvCategories()
-                Log.d(tag, avCategories.toString())
+                jsonTextView.text = avCategories.toString()
             }catch(e: Exception) {
             }
         }
@@ -42,11 +43,20 @@ class MainActivity : AppCompatActivity() {
         scope.launch {
             try {
                 val avCollections = service.getAvCollections(1)
-                print(avCollections)
-                Log.d(tag, avCollections.toString())
-                Log.d(tag, avCollections.toString())
+                jsonTextView.text = avCollections.toString()
             }catch(e: Exception) {
-                Log.d(tag, e.toString())
+            }
+        }
+    }
+
+    private fun tappedVideoButton() {
+        val service = AvRepository().getRetrofit()
+        val scope = CoroutineScope(Dispatchers.Default)
+        scope.launch {
+            try {
+                val avVideos = service.getAvVideos(0)
+                jsonTextView.text = avVideos.toString()
+            }catch(e: Exception) {
             }
         }
     }

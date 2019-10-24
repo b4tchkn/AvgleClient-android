@@ -1,6 +1,6 @@
 package com.batch.avgleclient.repository
 
-import com.batch.avgleclient.model.AvgleApi
+import com.batch.avgleclient.AvgleApi
 import com.squareup.moshi.Moshi
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory

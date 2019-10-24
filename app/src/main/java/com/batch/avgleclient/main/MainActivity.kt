@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.batch.avgleclient.R
-import com.batch.avgleclient.repository.CategoryRepository
+import com.batch.avgleclient.repository.AvRepository
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 import java.lang.Exception
@@ -14,21 +14,41 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        avButton.setOnClickListener {
-            tappedAvButton()
+        categoryButton.setOnClickListener {
+            tappedCategoryButton()
+        }
+        collectionButton.setOnClickListener {
+            tappedCollectionButton()
         }
     }
 
-    private fun tappedAvButton() {
-        val service = CategoryRepository().getCategory()
+    private val tag = "batchAV"
+
+    private fun tappedCategoryButton() {
+        val service = AvRepository().getRetrofit()
         val scope = CoroutineScope(Dispatchers.Default)
         scope.launch {
             try {
                 val avCategories = service.getAvCategories()
-                Log.d("bachi", avCategories.toString())
+                Log.d(tag, avCategories.toString())
             }catch(e: Exception) {
-                Log.d("bachi", e.toString())
             }
         }
     }
+
+    private fun tappedCollectionButton() {
+        val service = AvRepository().getRetrofit()
+        val scope = CoroutineScope(Dispatchers.Default)
+        scope.launch {
+            try {
+                val avCollections = service.getAvCollections(1)
+                print(avCollections)
+                Log.d(tag, avCollections.toString())
+                Log.d(tag, avCollections.toString())
+            }catch(e: Exception) {
+                Log.d(tag, e.toString())
+            }
+        }
+    }
+
 }

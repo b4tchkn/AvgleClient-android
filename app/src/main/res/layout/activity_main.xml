@@ -7,13 +7,24 @@
     tools:context=".main.MainActivity">
 
     <Button
-        android:id="@+id/avButton"
+        android:id="@+id/categoryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="HELLO, AV WORLD!"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="GET CATEGORY"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <Button
+        android:id="@+id/collectionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="GET COLLECTION"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/categoryButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.batch.avgleclient.model
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
 data class AvCategory(
     val success: Boolean,
@@ -9,18 +10,19 @@ data class AvCategory(
     data class Response(
         val categories: List<Category>
     ) {
+        @JsonClass(generateAdapter = true)
         data class Category(
-            @field:Json(name = "CHID")
+            @Json(name = "CHID")
             val chid: String,
             val name: String,
             val slug: String,
-            @field:Json(name = "total_videos")
+            @Json(name = "total_videos")
             val totalVideos: Int,
-            @field:Json(name = "shortname")
+            @Json(name = "shortname")
             val shortName: String,
-            @field:Json(name = "category_url")
+            @Json(name = "category_url")
             val categoryUrl: String,
-            @field:Json(name = "cover_url")
+            @Json(name = "cover_url")
             val coverUrl: String
         )
     }

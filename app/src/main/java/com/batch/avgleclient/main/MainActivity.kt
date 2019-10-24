@@ -7,7 +7,10 @@ import com.batch.avgleclient.R
 import com.batch.avgleclient.repository.AvRepository
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
+import okio.Utf8
 import java.lang.Exception
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +25,10 @@ class MainActivity : AppCompatActivity() {
         }
         videoButton.setOnClickListener {
             tappedVideoButton()
+        }
+
+        searchButton.setOnClickListener {
+            tappedSearchButton()
         }
     }
 
@@ -56,6 +63,18 @@ class MainActivity : AppCompatActivity() {
             try {
                 val avVideos = service.getAvVideos(0)
                 jsonTextView.text = avVideos.toString()
+            }catch(e: Exception) {
+            }
+        }
+    }
+
+    private fun tappedSearchButton() {
+        val service = AvRepository().getRetrofit()
+        val scope = CoroutineScope(Dispatchers.Default)
+        scope.launch {
+            try {
+                val searchResult = service.searchAv("紗倉まな", 0)
+                jsonTextView.text = searchResult.toString()
             }catch(e: Exception) {
             }
         }

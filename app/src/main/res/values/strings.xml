@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">AvgleClient</string>
+    <string name="API_AVGLE_URL">https://api.avgle.com/v1/</string>
+    <string name="alarm">Alarm</string>
+    <string name="clock">Clock</string>
+    <string name="timer">Timer</string>
+    <string name="stopwatch">StopWatch</string>
 </resources>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:title="@string/category"
-        android:id="@+id/bottomNavigationCategoryMenuId"
+        android:id="@+id/navigation_category"
         android:icon="@drawable/alarm_vector_icon"/>
     <item android:title="@string/collection"
-        android:id="@+id/bottomNavigationCollectionMenuId"
+        android:id="@+id/navigation_collection"
         android:icon="@drawable/clock_vector_icon"/>
 </menu>

@@ -11,29 +11,28 @@ import androidx.lifecycle.ViewModelProviders
 import com.batch.avgleclient.R
 
 class CategoryFragment : Fragment() {
-    private val viewModel by lazy { ViewModelProviders.of(this).get(CategoryViewModel::class.java) }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d("avavav", "fjdakfjl")
-        viewModel.fetchFromRemote()
-    }
+//    private val viewModel by lazy { ViewModelProviders.of(this).get(CategoryViewModel::class.java) }
+    private lateinit var viewModel: CategoryViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        observeViewModel(viewModel)
         return inflater.inflate(R.layout.fragment_category, container, false)
     }
 
-    private fun observeViewModel(viewModel: CategoryViewModel) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProviders.of(this).get(CategoryViewModel::class.java)
+        viewModel.fetchFromRemote()
+        observeViewModel()
+    }
+
+    private fun observeViewModel() {
         viewModel.categories.observe(viewLifecycleOwner, Observer { category ->
             if (category != null) {
-                Log.d("avavav", category.toString())
             } else {
-                Log.d("avavav", category.toString())
             }
         })
     }

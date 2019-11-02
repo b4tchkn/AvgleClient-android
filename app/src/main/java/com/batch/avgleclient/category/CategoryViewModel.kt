@@ -14,12 +14,11 @@ import kotlinx.coroutines.launch
 class CategoryViewModel(application: Application) : AndroidViewModel(application) {
     var categories = MutableLiveData<AvCategory>()
     private val api = AvRepository(application.applicationContext.getString(R.string.API_AVGLE_URL))
-    private val scope = CoroutineScope(Dispatchers.Default)
+    private val scope = CoroutineScope(Dispatchers.Main)
 
-    fun fetchFromRemote() : MutableLiveData<AvCategory>{
+    fun fetchFromRemote() {
         scope.launch {
-            categories = api.getAvCategories()
+            categories.value = api.getAvCategories()
         }
-        return categories
     }
 }

@@ -12,7 +12,7 @@ import retrofit2.http.Query
 
 interface AvgleApi {
     @GET("categories")
-    suspend fun getAvCategories(): MutableLiveData<AvCategory>
+    suspend fun getAvCategories(): AvCategory
 
     @GET("collections/{page}")
     suspend fun getAvCollections(

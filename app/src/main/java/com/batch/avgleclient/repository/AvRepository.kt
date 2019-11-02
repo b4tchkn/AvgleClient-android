@@ -1,5 +1,6 @@
 package com.batch.avgleclient.repository
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.batch.avgleclient.AvgleApi
 import com.batch.avgleclient.model.AvCategory
@@ -21,15 +22,15 @@ class AvRepository constructor(baseURL: String) : AvgleApi {
     }
 
     override suspend fun getAvCollections(page: Int): AvCollection {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return apiClient.getAvCollections(1)
     }
 
     override suspend fun getAvVideos(page: Int): AvVideo {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return apiClient.getAvVideos(0)
     }
 
     override suspend fun searchAv(query: String, page: Int): AvVideo {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return apiClient.searchAv("紗倉まな", 0)
     }
 
 

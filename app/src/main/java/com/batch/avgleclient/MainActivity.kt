@@ -4,6 +4,10 @@ import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.batch.avgleclient.R
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -11,27 +15,27 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //bottomNavigationView.inflateMenu(R.menu.bottom_navigation_menu)
-        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-            return@setOnNavigationItemSelectedListener when (item.itemId) {
-                R.id.bottomNavigationAlarmMenuId -> {
-                    Toast.makeText(this, "Alarm item clicked", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                R.id.bottomNavigationClockMenuId -> {
-                    Toast.makeText(this, "Clock item clicked", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                R.id.bottomNavigationTimerMenuId -> {
-                    Toast.makeText(this, "Timer item clicked", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                R.id.bottomNavigationStopWatchMenuId -> {
-                    Toast.makeText(this, "StopWatch item clicked", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                else -> false
-            }
-        }
+        val navigationController = findNavController(R.id.nav_host_fragment)
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_category, R.id.navigation_collection
+            )
+        )
+        setupActionBarWithNavController(navigationController, appBarConfiguration)
+        bottomNavigationView.setupWithNavController(navigationController)
+//
+//        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+//            return@setOnNavigationItemSelectedListener when (item.itemId) {
+//                R.id.bottomNavigationCategoryMenuId -> {
+//                    Toast.makeText(this, "Alarm item clicked", Toast.LENGTH_SHORT).show()
+//                    true
+//                }
+//                R.id.bottomNavigationCollectionMenuId -> {
+//                    Toast.makeText(this, "Clock item clicked", Toast.LENGTH_SHORT).show()
+//                    true
+//                }
+//                else -> false
+//            }
+//        }
     }
 }

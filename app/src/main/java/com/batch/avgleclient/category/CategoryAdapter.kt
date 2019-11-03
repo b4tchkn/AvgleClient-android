@@ -26,5 +26,6 @@ class CategoryAdapter(private val avCategories: ArrayList<AvCategory.Response.Ca
     fun updateCategoryList(newCategoryList: List<AvCategory.Response.Category>) {
         avCategories.clear()
         avCategories.addAll(newCategoryList)
+        notifyDataSetChanged()
     }
 }

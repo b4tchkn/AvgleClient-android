@@ -3,6 +3,8 @@
     <string name="API_AVGLE_URL">https://api.avgle.com/v1/</string>
     <string name="category">Category</string>
     <string name="collection">Collection</string>
+    <string name="movieCount">動画数：</string>
+    <string name="ponn">本</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

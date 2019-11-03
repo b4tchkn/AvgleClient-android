@@ -13,9 +13,11 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:cardCornerRadius="10dp">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -34,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:padding="10dp"
-                android:layout_gravity="bottom"
+                android:layout_gravity="top"
                 android:background="#88000000"
                 android:textColor="@color/colorAccent"
                 android:text="@{category.shortName}"
@@ -44,10 +46,13 @@
                 android:id="@+id/totalVideos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="6dp"
+                android:layout_margin="8dp"
                 android:layout_gravity="bottom|right"
-                android:textColor="@color/colorAccent"
-                android:text="@{Integer.toString(category.totalVideos)}"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/rounded_corner_text_view"
+                android:shadowRadius="@android:integer/config_longAnimTime"
+                android:text="@{Integer.toString(category.totalVideos)+@string/ponn}"
                 tools:text="totalVideos"></TextView>
         </FrameLayout>
     </androidx.cardview.widget.CardView>

@@ -5,5 +5,5 @@
         android:icon="@drawable/ic_view_agenda_black_24dp"/>
     <item android:title="@string/collection"
         android:id="@+id/navigation_collection"
-        android:icon="@drawable/clock_vector_icon"/>
+        android:icon="@drawable/ic_widgets_black_24dp"/>
 </menu>

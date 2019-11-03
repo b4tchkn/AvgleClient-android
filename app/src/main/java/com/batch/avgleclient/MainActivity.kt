@@ -23,19 +23,5 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navigationController, appBarConfiguration)
         bottomNavigationView.setupWithNavController(navigationController)
-
-//        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-//            return@setOnNavigationItemSelectedListener when (item.itemId) {
-//                R.id.bottomNavigationCategoryMenuId -> {
-//                    Toast.makeText(this, "Alarm item clicked", Toast.LENGTH_SHORT).show()
-//                    true
-//                }
-//                R.id.bottomNavigationCollectionMenuId -> {
-//                    Toast.makeText(this, "Clock item clicked", Toast.LENGTH_SHORT).show()
-//                    true
-//                }
-//                else -> false
-//            }
-//        }
     }
 }

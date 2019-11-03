@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="category"
+            type="com.batch.avgleclient.model.AvCategory.Response.Category" />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:imageUrl="@{category.coverUrl}">
+        </ImageView>
+        <TextView
+            android:id="@+id/shortName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@{category.shortName}">
+        </TextView>
+        <TextView
+            android:id="@+id/totalVideos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{category.totalVideos}">
+        </TextView>
+    </LinearLayout>
+</layout>

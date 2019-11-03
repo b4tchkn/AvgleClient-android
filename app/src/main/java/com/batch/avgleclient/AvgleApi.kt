@@ -1,18 +1,14 @@
 package com.batch.avgleclient
 
-import android.provider.Settings.System.getString
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.batch.avgleclient.model.AvCategory
 import com.batch.avgleclient.model.AvCollection
 import com.batch.avgleclient.model.AvVideo
 import retrofit2.http.GET
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface AvgleApi {
     @GET("categories")
-    suspend fun getAvCategories(): AvCategory
+    suspend fun getAvCategories(): List<AvCategory.Response.Category>
 
     @GET("collections/{page}")
     suspend fun getAvCollections(

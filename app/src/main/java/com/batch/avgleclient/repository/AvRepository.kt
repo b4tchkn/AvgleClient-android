@@ -11,26 +11,26 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 class AvRepository constructor(baseURL: String) : AvgleApi {
-    val apiClient = Retrofit.Builder()
+    private val apiClient = Retrofit.Builder()
         .baseUrl(baseURL)
         .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().build()))
         .build()
         .create(AvgleApi::class.java)
 
-    override suspend fun getAvCategories(): AvCategory {
+    override suspend fun getAvCategories(): List<AvCategory.Response.Category> {
         return apiClient.getAvCategories()
     }
 
     override suspend fun getAvCollections(page: Int): AvCollection {
-        return apiClient.getAvCollections(1)
+        return apiClient.getAvCollections(page)
     }
 
     override suspend fun getAvVideos(page: Int): AvVideo {
-        return apiClient.getAvVideos(0)
+        return apiClient.getAvVideos(page)
     }
 
     override suspend fun searchAv(query: String, page: Int): AvVideo {
-        return apiClient.searchAv("紗倉まな", 0)
+        return apiClient.searchAv(query, page)
     }
 
 

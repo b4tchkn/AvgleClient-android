@@ -19,9 +19,9 @@ class CategoryViewModel(application: Application) : AndroidViewModel(application
     private val api = AvRepository(application.applicationContext.getString(R.string.API_AVGLE_URL))
     private val scope = CoroutineScope(Dispatchers.Main)
 
-    init {
-        fetchFromRemote()
-    }
+//    init {
+//        fetchFromRemote()
+//    }
 
     fun fetchFromRemote() {
 //        viewModelScope.launch {
@@ -30,7 +30,8 @@ class CategoryViewModel(application: Application) : AndroidViewModel(application
         scope.launch {
             try {
                 //            categories.postValue(api.getAvCategories())
-                categories.value = api.getAvCategories()
+                categories.value = api.getAvCategories().response.categories
+                Log.d("LOGLOG", categories.value.toString())
             } catch (e: Exception) {
                 e.stackTrace
                 Log.d("LOGLOG", e.toString())

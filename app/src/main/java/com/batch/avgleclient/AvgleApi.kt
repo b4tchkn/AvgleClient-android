@@ -8,7 +8,7 @@ import retrofit2.http.Path
 
 interface AvgleApi {
     @GET("categories")
-    suspend fun getAvCategories(): List<AvCategory.Response.Category>
+    suspend fun getAvCategories(): AvCategory
 
     @GET("collections/{page}")
     suspend fun getAvCollections(

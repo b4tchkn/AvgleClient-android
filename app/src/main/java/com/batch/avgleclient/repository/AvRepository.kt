@@ -17,7 +17,7 @@ class AvRepository constructor(baseURL: String) : AvgleApi {
         .build()
         .create(AvgleApi::class.java)
 
-    override suspend fun getAvCategories(): List<AvCategory.Response.Category> {
+    override suspend fun getAvCategories(): AvCategory {
         return apiClient.getAvCategories()
     }
 

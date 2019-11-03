@@ -18,13 +18,13 @@
             android:id="@+id/shortName"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="@{category.shortName}">
+            android:text="@{String.valueOf(category.shortName)}">
         </TextView>
         <TextView
             android:id="@+id/totalVideos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{category.totalVideos}">
+            android:text="@{Integer.valueOf(category.totalVideos)}">
         </TextView>
     </LinearLayout>
 </layout>

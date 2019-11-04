@@ -20,7 +20,8 @@
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="10dp"
+        android:foreground="@drawable/ripple">
 <!--        android:onClick="@{() -> listener.onCategoryClicked(category)}"-->
 
         <FrameLayout

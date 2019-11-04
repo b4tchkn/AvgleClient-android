@@ -4,13 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="category"
             type="com.batch.avgleclient.model.AvCategory.Response.Category" />
+        <variable
+            name="listener"
+            type="com.batch.avgleclient.category.CategoryClickListener" />
     </data>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/categoryCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -18,6 +21,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         app:cardCornerRadius="10dp">
+<!--        android:onClick="@{() -> listener.onCategoryClicked(category)}"-->
 
         <FrameLayout
             android:layout_width="match_parent"

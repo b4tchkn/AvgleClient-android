@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+    <data>
+        <variable
+            name="collection"
+            type="com.batch.avgleclient.model.AvCollection.Response.Collection" />
+    </data>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/itemCollectionCardView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="4dp">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@{collection.title}"
+            tools:text="紗倉まな"
+            android:textSize="50sp">
+        </TextView>
+    </androidx.cardview.widget.CardView>
+</layout>

@@ -41,6 +41,7 @@ def moshiVersion = '1.8.0'
 def navVersion = '2.1.0'
 def glideVersion = '4.9.0'
 def customTabsVersion = '1.0.0'
+def groupieVersion = '2.7.0'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -79,4 +80,9 @@ dependencies {
 
     // custom tabs
     implementation "androidx.browser:browser:$customTabsVersion"
+
+    // groupie
+    implementation "com.xwray:groupie:$groupieVersion"
+    implementation "com.xwray:groupie-kotlin-android-extensions:$groupieVersion"
+    implementation "com.xwray:groupie-databinding:$groupieVersion"
 }

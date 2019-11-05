@@ -29,7 +29,7 @@ class CollectionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(CollectionViewModel::class.java)
-        viewModel.fetchFromRemote(0)
+        viewModel.fetchFromRemote(1)
         observeViewModel()
     }
 

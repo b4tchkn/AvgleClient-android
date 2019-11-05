@@ -5,5 +5,5 @@
     <!-- タップしたとき -->
     <item android:color="?colorPrimaryDark" android:state_pressed="true"/>
     <!-- 通常 -->
-    <item android:color="#FFFFFF"/>
+    <item android:color="#9A9EAB"/>
 </selector>

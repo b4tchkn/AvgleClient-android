@@ -32,12 +32,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="#2F496E">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{collection.title}"
                     android:textSize="15sp"
+                    android:textColor="#FFFFFF"
                     tools:text="title">
                 </TextView>
 
@@ -46,6 +48,7 @@
                     android:layout_height="wrap_content"
                     android:text="@{Integer.toString(collection.videoCount)+@string/ponn}"
                     android:gravity="right"
+                    android:textColor="#FFFFFF"
                     tools:text="videocount"></TextView>
             </LinearLayout>
         </LinearLayout>

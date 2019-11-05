@@ -30,35 +30,8 @@ class CollectionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(CollectionViewModel::class.java)
         viewModel.fetchFromRemote(0)
-//        val groupieAdapter = GroupAdapter<GroupieViewHolder>().apply {
-//             gridにするとき
-//            spanCount = 2
-//            addAll(MutableCollection<AvCollection.Response.Collection>())
-//            addAll(viewModel.collections.value)
-//        }
         observeViewModel()
-//        collectionRecyclerView.apply {
-//             gridにするとき
-//            layoutManager = GridLayoutManager(context, groupieAdapter.spanCount).apply {
-//                spanSizeLookup = groupieAdapter.spanSizeLookup
-//            }
-//            layoutManager = LinearLayoutManager(context)
-//            adapter = groupieAdapter
-//        }
     }
-
-//    private fun observeViewModel(adapter: GroupAdapter<GroupieViewHolder>) {
-//        viewModel.collections.observe(this, Observer {
-//            it?.let { collection ->
-//                collectionRecyclerView.visibility = View.VISIBLE
-//                adapter.update(mutableListOf<Group>()).apply {
-//                    collection.forEach { collectionItem ->
-//                        CollectionItem(collectionItem)
-//                    }
-//                }
-//            }
-//        })
-//    }
 
     private fun observeViewModel() {
         viewModel.collections.observe(this, Observer {

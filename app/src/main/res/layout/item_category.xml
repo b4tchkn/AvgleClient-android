@@ -34,7 +34,7 @@
                 android:layout_height="200dp"
                 android:imageUrl="@{category.coverUrl}"
                 android:src="@drawable/noimage"
-                android:scaleType="centerCrop"></ImageView>
+                android:scaleType="centerCrop"/>
 
             <TextView
                 android:id="@+id/shortName"
@@ -46,7 +46,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorAccent"
                 android:text="@{category.shortName}"
-                tools:text="shortName"></TextView>
+                tools:text="shortName"/>
 
             <TextView
                 android:id="@+id/totalVideos"
@@ -59,7 +59,7 @@
                 android:background="@drawable/rounded_corner_text_view"
                 android:shadowRadius="@android:integer/config_longAnimTime"
                 android:text="@{Integer.toString(category.totalVideos)+@string/ponn}"
-                tools:text="totalVideos"></TextView>
+                tools:text="totalVideos"/>
         </FrameLayout>
     </androidx.cardview.widget.CardView>
 </layout>

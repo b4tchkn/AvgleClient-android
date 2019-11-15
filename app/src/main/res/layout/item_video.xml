@@ -7,59 +7,57 @@
         <variable
             name="video"
             type="com.batch.avgleclient.model.AvVideo.Response.Videos" />
+
         <variable
             name="listener"
             type="com.batch.avgleclient.category.CategoryClickListener" />
     </data>
 
-    <androidx.cardview.widget.CardView
+    <LinearLayout
         android:id="@+id/categoryCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        app:cardCornerRadius="10dp"
-        android:foreground="@drawable/ripple">
-        <!--        android:onClick="@{() -> listener.onCategoryClicked(category)}"-->
-
-        <FrameLayout
+        android:background="#000000"
+        android:foreground="@drawable/ripple"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:imageUrl="@{video.previewUrl}"
+            android:scaleType="center"
+            android:src="@drawable/noimage"/>
+        <TextView
+            android:id="@+id/shortName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:imageUrl="@{video.previewUrl}"
-                android:src="@drawable/noimage"
-                android:scaleType="centerCrop"></ImageView>
-
-            <TextView
-                android:id="@+id/shortName"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:padding="10dp"
-                android:layout_gravity="top"
-                android:background="#88000000"
-                android:textStyle="bold"
-                android:textColor="@color/colorAccent"
-                android:textSize="10sp"
-                android:text="@{video.title}"
-                tools:text="shortName"></TextView>
-
-            <TextView
-                android:id="@+id/totalVideos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="6dp"
-                android:layout_margin="8dp"
-                android:layout_gravity="bottom|right"
-                android:textColor="#FFFFFF"
-                android:background="@drawable/rounded_corner_text_view"
-                android:shadowRadius="@android:integer/config_longAnimTime"
-                tools:text="totalVideos"></TextView>
-        </FrameLayout>
-    </androidx.cardview.widget.CardView>
+            android:layout_gravity="top"
+            android:text="@{video.title}"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:text="Video Title"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{video.keyword}"
+            android:textColor="#FFFFFF"
+            android:singleLine="true"
+            tools:text="keyword"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:shadowRadius="@android:integer/config_longAnimTime"
+            android:textColor="#FFFFFF"
+            android:text="@{Integer.toString(video.viewNumber)+@string/views}"
+            tools:text="1000views"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:shadowRadius="@android:integer/config_longAnimTime"
+            android:textColor="#FFFFFF"
+            android:text="@{Float.toString(video.duration/60)}"
+            tools:text="duration"/>
+    </LinearLayout>
 </layout>

@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.net.toUri
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -59,6 +61,13 @@ class HomeFragment : Fragment() {
     }
 
     private val onItemClickListener = OnItemClickListener { item, view ->
+        val index = this.topVideoListAdapter.getAdapterPosition(item)
+        val videoUrl = viewModel.topVideos.value!![index].videoUrl
+        val tabsIntent = CustomTabsIntent.Builder()
+            .setShowTitle(true)
+            .setToolbarColor(view.context.getColor(R.color.colorAccent))
+            .build()
+        tabsIntent.launchUrl(view.context, videoUrl.toUri())
     }
 
 }

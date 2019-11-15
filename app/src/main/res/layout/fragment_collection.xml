@@ -9,6 +9,8 @@
         android:id="@+id/collectionRecyclerView"
         tools:listitem="@layout/item_collection"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:padding="30dp"
+        android:clipToPadding="false"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

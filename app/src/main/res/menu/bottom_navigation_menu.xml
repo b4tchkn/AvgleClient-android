@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/home"
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home"/>
     <item android:title="@string/category"
         android:id="@+id/navigation_category"
-        android:icon="@drawable/ic_view_agenda_black_24dp"/>
+        android:icon="@drawable/ic_view_agenda"/>
     <item android:title="@string/collection"
         android:id="@+id/navigation_collection"
-        android:icon="@drawable/ic_widgets_black_24dp"/>
+        android:icon="@drawable/ic_widgets"/>
 </menu>

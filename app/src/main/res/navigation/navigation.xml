@@ -3,8 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/navigation_category">
+    app:startDestination="@id/navigation_home">
 
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.batch.avgleclient.home.HomeFragment"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_home">
+    </fragment>
     <fragment
         android:id="@+id/navigation_category"
         android:name="com.batch.avgleclient.category.CategoryFragment"
@@ -17,5 +23,4 @@
         android:label="@string/collection"
         tools:layout="@layout/fragment_collection">
     </fragment>
-
 </navigation>

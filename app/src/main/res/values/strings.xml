@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">AvgleClient</string>
     <string name="API_AVGLE_URL">https://api.avgle.com/v1/</string>
+    <string name="home">Home</string>
     <string name="category">Category</string>
     <string name="collection">Collection</string>
     <string name="movieCount">動画数：</string>

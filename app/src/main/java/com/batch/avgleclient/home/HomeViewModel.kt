@@ -15,14 +15,16 @@ import java.lang.Exception
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
     var topVideos = MutableLiveData<List<AvVideo.Response.Videos>>()
+    val loading = MutableLiveData<Boolean>()
     private val api = AvRepository(application.applicationContext.getString(R.string.API_AVGLE_URL))
     private val scope = CoroutineScope(Dispatchers.Main)
 
     fun fetchFromRemote() {
+        loading.value = true
         scope.launch {
             try {
                 topVideos.value = api.getAvVideos(0).response.videos
-                Log.d("LOGLOG", topVideos.value.toString())
+                loading.value = false
             } catch (e: Exception) {
                 e.stackTrace
                 Log.d("LOGLOG", e.toString())

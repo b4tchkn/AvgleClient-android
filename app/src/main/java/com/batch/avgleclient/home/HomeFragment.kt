@@ -17,7 +17,9 @@ import com.batch.avgleclient.model.AvVideo
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.OnItemClickListener
+import kotlinx.android.synthetic.main.fragment_category.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.loadingView
 
 class HomeFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
@@ -38,7 +40,16 @@ class HomeFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.topVideos.observe(this, Observer {
+            topVideosList.visibility = View.VISIBLE
             initRecyclerView(it.toVideoListItem())
+        })
+        viewModel.loading.observe(this, Observer { isLoading ->
+            isLoading?.let {
+                loadingView.visibility = if(it) View.VISIBLE else View.GONE
+                if (it) {
+                    topVideosList.visibility = View.GONE
+                }
+            }
         })
     }
 

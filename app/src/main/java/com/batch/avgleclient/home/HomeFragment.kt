@@ -36,6 +36,12 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         viewModel.fetchFromRemote()
         observeViewModel()
+        refreshLayout.setOnRefreshListener {
+            topVideosList.visibility = View.GONE
+            loadingView.visibility = View.VISIBLE
+            viewModel.fetchFromRemote()
+            refreshLayout.isRefreshing = false
+        }
     }
 
     private fun observeViewModel() {

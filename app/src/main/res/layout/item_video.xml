@@ -22,42 +22,63 @@
         android:background="#000000"
         android:foreground="@drawable/ripple"
         android:orientation="vertical">
-        <ImageView
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:imageUrl="@{video.previewUrl}"
-            android:scaleType="center"
-            android:src="@drawable/noimage"/>
-        <TextView
-            android:id="@+id/shortName"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:imageUrl="@{video.previewUrl}"
+                android:foreground="@drawable/video_item_shadow"
+                android:scaleType="centerCrop"
+                android:src="@drawable/noimage"/>
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_play_arrow"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:shadowRadius="@android:integer/config_longAnimTime"
+                android:background="@drawable/rounded_corner_text_view"
+                android:layout_gravity="right|bottom"
+                android:layout_margin="4dp"
+                android:paddingRight="4dp"
+                android:paddingLeft="4dp"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:text="@{Float.toString(video.duration/60)}"
+                tools:text="duration"/>
+        </FrameLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:text="@{video.title}"
-            android:textColor="#FFFFFF"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            tools:text="Video Title"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{video.keyword}"
-            android:textColor="#FFFFFF"
-            android:singleLine="true"
-            tools:text="keyword"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:shadowRadius="@android:integer/config_longAnimTime"
-            android:textColor="#FFFFFF"
-            android:text="@{Integer.toString(video.viewNumber)+@string/views}"
-            tools:text="1000views"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:shadowRadius="@android:integer/config_longAnimTime"
-            android:textColor="#FFFFFF"
-            android:text="@{Float.toString(video.duration/60)}"
-            tools:text="duration"/>
+            android:orientation="vertical"
+            android:layout_margin="8dp">
+            <TextView
+                android:id="@+id/shortName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:text="@{video.title}"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                tools:text="Video Title"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{video.keyword}"
+                android:textColor="#FFFFFF"
+                android:singleLine="true"
+                tools:text="keyword"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:text="@{Integer.toString(video.viewNumber)+@string/views}"
+                tools:text="1000views" />
+        </LinearLayout>
     </LinearLayout>
 </layout>

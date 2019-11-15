@@ -31,14 +31,21 @@ class CategoryAdapter(private val avCategories: ArrayList<AvCategory.Response.Ca
 //        override fun onCategoryClicked(category: AvCategory.Response.Category) {
 //            Log.d("TAGTAGTAG", category.categoryUrl)
 //        }
-        holder.view.categoryCardView.setOnClickListener {
-            Toast.makeText(it.context, avCategories[position].categoryUrl, Toast.LENGTH_SHORT).show()
+        holder.view.categoryItemView.setOnClickListener {
             val tabsIntent = CustomTabsIntent.Builder()
                 .setShowTitle(true)
                 .setToolbarColor(it.context.getColor(R.color.colorAccent))
                 .build()
             tabsIntent.launchUrl(it.context, avCategories[position].categoryUrl.toUri())
         }
+//        holder.view.categoryCardView.setOnClickListener {
+//            Toast.makeText(it.context, avCategories[position].categoryUrl, Toast.LENGTH_SHORT).show()
+//            val tabsIntent = CustomTabsIntent.Builder()
+//                .setShowTitle(true)
+//                .setToolbarColor(it.context.getColor(R.color.colorAccent))
+//                .build()
+//            tabsIntent.launchUrl(it.context, avCategories[position].categoryUrl.toUri())
+//        }
     }
 
     override fun getItemCount() = avCategories.size

@@ -2,6 +2,7 @@ package com.batch.avgleclient.home
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.core.net.toUri
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import com.batch.avgleclient.R
 import com.batch.avgleclient.model.AvVideo
@@ -42,6 +44,7 @@ class HomeFragment : Fragment() {
             viewModel.fetchFromRemote()
             refreshLayout.isRefreshing = false
         }
+        setRecyclerViewScrollListener()
     }
 
     private fun observeViewModel() {
@@ -51,7 +54,7 @@ class HomeFragment : Fragment() {
         })
         viewModel.loading.observe(this, Observer { isLoading ->
             isLoading?.let {
-                loadingView.visibility = if(it) View.VISIBLE else View.GONE
+                loadingView.visibility = if (it) View.VISIBLE else View.GONE
                 if (it) {
                     topVideosList.visibility = View.GONE
                 }
@@ -87,4 +90,14 @@ class HomeFragment : Fragment() {
         tabsIntent.launchUrl(view.context, videoUrl.toUri())
     }
 
+    private fun setRecyclerViewScrollListener() {
+        object : RecyclerView.OnScrollListener() {
+        }
+        val totalCount = topVideosList.adapter?.itemCount
+        val childCount = topVideosList.childCount
+        val firstPosition = LinearLayoutManager(context).findFirstVisibleItemPosition()
+        if (totalCount == childCount + firstPosition) {
+            // ここでProgressBar表示させて次のページのリクエスト送りたい
+        }
+    }
 }

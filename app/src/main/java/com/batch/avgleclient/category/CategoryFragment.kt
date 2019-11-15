@@ -25,7 +25,7 @@ class CategoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(CategoryViewModel::class.java)
-        viewModel.fetchFromRemote()
+        viewModel.refresh()
         categoriesList.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = categoryAdapter
@@ -38,6 +38,14 @@ class CategoryFragment : Fragment() {
             categories?.let {
                 categoriesList.visibility = View.VISIBLE
                 categoryAdapter.updateCategoryList(categories)
+            }
+        })
+        viewModel.loading.observe(this, Observer { isLoading ->
+            isLoading?.let {
+                loadingView.visibility = if(it) View.VISIBLE else View.GONE
+                if (it) {
+                    categoriesList.visibility = View.GONE
+                }
             }
         })
     }

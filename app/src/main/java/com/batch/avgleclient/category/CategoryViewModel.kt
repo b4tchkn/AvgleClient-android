@@ -6,36 +6,73 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.room.Database
 import com.batch.avgleclient.model.AvCategory
 import com.batch.avgleclient.repository.AvRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import com.batch.avgleclient.R
+import com.batch.avgleclient.model.AvCategoryDao
+import com.batch.avgleclient.model.AvCategoryDatabase
+import com.batch.avgleclient.utli.SharedPreferencesHelper
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
 class CategoryViewModel(application: Application) : AndroidViewModel(application) {
     var categories = MutableLiveData<List<AvCategory.Response.Category>>()
+    val loading = MutableLiveData<Boolean>()
+    private var refreshTime = 5 * 60 * 1000 * 1000 * 1000L
+    private var prefHelper = SharedPreferencesHelper(getApplication())
     private val api = AvRepository(application.applicationContext.getString(R.string.API_AVGLE_URL))
     private val scope = CoroutineScope(Dispatchers.Main)
 
-//    init {
-//        fetchFromRemote()
-//    }
+    fun refresh() {
+        val updateTime = prefHelper.getUpdateTime()
+        if (updateTime != null && updateTime != 0L && System.nanoTime() - updateTime < refreshTime) {
+            fetchFromDatabase()
+        } else {
+            fetchFromRemote()
+        }
+    }
 
-    fun fetchFromRemote() {
-//        viewModelScope.launch {
-//            categories.value = api.getAvCategories()
-//        }
+    private fun fetchFromRemote() {
+        loading.value = true
         scope.launch {
             try {
-                //            categories.postValue(api.getAvCategories())
-                categories.value = api.getAvCategories().response.categories
-                Log.d("LOGLOG", categories.value.toString())
+                val avCategories = api.getAvCategories().response.categories
+                categoriesRetrieved(avCategories)
+                storeCategoriesLocally(avCategories)
             } catch (e: Exception) {
                 e.stackTrace
-                Log.d("LOGLOG", e.toString())
             }
         }
+    }
+
+    private fun fetchFromDatabase() {
+        loading.value = true
+        scope.launch {
+            val avCategories = AvCategoryDatabase(getApplication()).avCategoryDao().getAllCategories()
+            categoriesRetrieved(avCategories)
+        }
+    }
+
+    private fun categoriesRetrieved(categoryList: List<AvCategory.Response.Category>) {
+        categories.value = categoryList
+        loading.value = false
+    }
+
+    private fun storeCategoriesLocally(list: List<AvCategory.Response.Category>) {
+        scope.launch {
+            val dao = AvCategoryDatabase(getApplication()).avCategoryDao()
+            dao.deleteAllCategories()
+            val result = dao.insertAll(*list.toTypedArray())
+            var i = 0
+            while (i < list.size) {
+                list[i].uuid = result[i].toInt()
+                ++i
+            }
+            categoriesRetrieved(list)
+        }
+        prefHelper.saveUpdateTime(System.nanoTime())
     }
 }

@@ -2,34 +2,56 @@ package com.batch.avgleclient.home
 
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.net.toUri
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-
 import com.batch.avgleclient.R
+import com.batch.avgleclient.databinding.FragmentHomeBinding
 import com.batch.avgleclient.model.AvVideo
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.OnItemClickListener
-import kotlinx.android.synthetic.main.fragment_home.*
-import timber.log.Timber
 
 class HomeFragment : Fragment() {
+
     private lateinit var viewModel: HomeViewModel
     private val topVideoListAdapter = GroupAdapter<GroupieViewHolder>()
+
+    private lateinit var binding: FragmentHomeBinding
+
+    private val loadingItem = LoadingItem()
+
+    lateinit var scrollListener: EndlessScrollListener
+
+    private val onItemClickListener = OnItemClickListener { item, view ->
+        val index = this.topVideoListAdapter.getAdapterPosition(item)
+        val videoUrl = viewModel.topVideos.value!![index].videoUrl
+        val tabsIntent = CustomTabsIntent.Builder()
+            .setShowTitle(true)
+            .setToolbarColor(view.context.getColor(R.color.colorAccent))
+            .build()
+        tabsIntent.launchUrl(view.context, videoUrl.toUri())
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
+        observeVideos()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        binding = FragmentHomeBinding.bind(view)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,60 +65,43 @@ class HomeFragment : Fragment() {
             viewModel.fetchFromRemote()
             refresh_layout.isRefreshing = false
         }
-        setRecyclerViewScrollListener()
+        viewModel.init()
     }
 
-    private fun observeViewModel() {
+    private fun observeVideos() {
         viewModel.topVideos.observe(this, Observer {
-            top_videos_list.visibility = View.VISIBLE
-            initRecyclerView(it.toVideoListItem())
-        })
-        viewModel.loading.observe(this, Observer { isLoading ->
-            isLoading?.let {
-                loading_view.visibility = if (it) View.VISIBLE else View.GONE
-                if (it) {
-                    top_videos_list.visibility = View.GONE
+            viewModel.loading.value = false
+            binding.refreshLayout.isRefreshing = false
+            scrollListener.loading = false
+            topVideoListAdapter.apply {
+                if (itemCount > 0 && getItemViewType(itemCount - 1) == loadingItem.viewType) {
+                    remove(loadingItem)
                 }
+                addAll(it.toVideoListItem())
+                setOnItemClickListener(onItemClickListener)
             }
         })
     }
 
-    private fun initRecyclerView(videoListItem: List<VideoListItem>) {
-        topVideoListAdapter.apply {
-            update(videoListItem)
-            setOnItemClickListener(onItemClickListener)
+    private fun initRecyclerView() {
+        val manager = LinearLayoutManager(context)
+        val loadMore = { page: Int ->
+            scrollListener.loading = true
+            topVideoListAdapter.add(loadingItem)
+            viewModel.fetchNext(page)
         }
-        top_videos_list.apply {
-            layoutManager = LinearLayoutManager(context)
+        scrollListener = EndlessScrollListener(manager, loadMore)
+        binding.topVideosList.apply {
+            layoutManager = manager
             setHasFixedSize(true)
             adapter = topVideoListAdapter
+            addOnScrollListener(scrollListener)
         }
     }
 
-    fun List<AvVideo.Response.Videos>.toVideoListItem(): List<VideoListItem> {
+    private fun List<AvVideo.Response.Videos>.toVideoListItem(): List<VideoListItem> {
         return this.map {
             VideoListItem(it)
-        }
-    }
-
-    private val onItemClickListener = OnItemClickListener { item, view ->
-        val index = this.topVideoListAdapter.getAdapterPosition(item)
-        val videoUrl = viewModel.topVideos.value!![index].videoUrl
-        val tabsIntent = CustomTabsIntent.Builder()
-            .setShowTitle(true)
-            .setToolbarColor(view.context.getColor(R.color.colorAccent))
-            .build()
-        tabsIntent.launchUrl(view.context, videoUrl.toUri())
-    }
-
-    private fun setRecyclerViewScrollListener() {
-        object : RecyclerView.OnScrollListener() {
-        }
-        val totalCount = top_videos_list.adapter?.itemCount
-        val childCount = top_videos_list.childCount
-        val firstPosition = LinearLayoutManager(context).findFirstVisibleItemPosition()
-        if (totalCount == childCount + firstPosition) {
-            // ここでProgressBar表示させて次のページのリクエスト送りたい
         }
     }
 }

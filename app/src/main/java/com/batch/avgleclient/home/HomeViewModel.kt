@@ -4,30 +4,32 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.batch.avgleclient.R
 import com.batch.avgleclient.model.AvVideo
 import com.batch.avgleclient.repository.AvRepository
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.DisposableHandle
 import kotlinx.coroutines.launch
-import java.lang.Exception
+import kotlinx.coroutines.withContext
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
     var topVideos = MutableLiveData<List<AvVideo.Response.Videos>>()
     val loading = MutableLiveData<Boolean>()
     private val api = AvRepository(application.applicationContext.getString(R.string.API_AVGLE_URL))
-    private val scope = CoroutineScope(Dispatchers.Main)
 
-    fun fetchFromRemote() {
-        loading.value = true
-        scope.launch {
-            try {
-                topVideos.value = api.getAvVideos(0).response.videos
-                loading.value = false
-            } catch (e: Exception) {
-                e.stackTrace
-                Log.d("LOGLOG", e.toString())
+    fun init() {
+        fetchNext(0)
+    }
+
+    fun fetchNext(page: Int) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                try {
+                    val videos = api.getAvVideos(page).response.videos
+                    topVideos.postValue(videos)
+                } catch (e: Exception) {
+                    Log.e("LOGLOG", e.toString())
+                }
             }
         }
     }

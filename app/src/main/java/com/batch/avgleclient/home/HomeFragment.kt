@@ -17,6 +17,7 @@ import com.batch.avgleclient.model.AvVideo
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.OnItemClickListener
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
 
@@ -56,14 +57,16 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        viewModel.fetchFromRemote()
-        observeViewModel()
-        refresh_layout.setOnRefreshListener {
-            top_videos_list.visibility = View.GONE
-            loading_view.visibility = View.VISIBLE
-            viewModel.fetchFromRemote()
-            refresh_layout.isRefreshing = false
+        viewModel.loading.value = true
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+        binding.refreshLayout.isRefreshing = false
+        initRecyclerView()
+        binding.refreshLayout.setOnRefreshListener {
+            viewModel.loading.value = true
+            topVideoListAdapter.clear()
+            viewModel.init()
+            binding.refreshLayout.isRefreshing = true
         }
         viewModel.init()
     }

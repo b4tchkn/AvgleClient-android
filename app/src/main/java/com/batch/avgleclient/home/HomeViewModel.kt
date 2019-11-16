@@ -28,7 +28,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                     val videos = api.getAvVideos(page).response.videos
                     topVideos.postValue(videos)
                 } catch (e: Exception) {
-                    Log.e("LOGLOG", e.toString())
+                    e.stackTrace
                 }
             }
         }

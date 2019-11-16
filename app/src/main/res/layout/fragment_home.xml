@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/refreshLayout"
+        android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,7 +13,7 @@
             tools:context=".category.CategoryFragment">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/topVideosList"
+                android:id="@+id/top_videos_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:listitem="@layout/item_video"
@@ -23,7 +23,7 @@
                 app:layout_constraintTop_toTopOf="parent">
             </androidx.recyclerview.widget.RecyclerView>
             <ProgressBar
-                android:id="@+id/loadingView"
+                android:id="@+id/loading_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"

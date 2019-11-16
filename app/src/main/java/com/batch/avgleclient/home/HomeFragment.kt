@@ -19,9 +19,7 @@ import com.batch.avgleclient.model.AvVideo
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.OnItemClickListener
-import kotlinx.android.synthetic.main.fragment_category.*
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.loadingView
 
 class HomeFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
@@ -38,25 +36,25 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         viewModel.fetchFromRemote()
         observeViewModel()
-        refreshLayout.setOnRefreshListener {
-            topVideosList.visibility = View.GONE
-            loadingView.visibility = View.VISIBLE
+        refresh_layout.setOnRefreshListener {
+            top_videos_list.visibility = View.GONE
+            loading_view.visibility = View.VISIBLE
             viewModel.fetchFromRemote()
-            refreshLayout.isRefreshing = false
+            refresh_layout.isRefreshing = false
         }
         setRecyclerViewScrollListener()
     }
 
     private fun observeViewModel() {
         viewModel.topVideos.observe(this, Observer {
-            topVideosList.visibility = View.VISIBLE
+            top_videos_list.visibility = View.VISIBLE
             initRecyclerView(it.toVideoListItem())
         })
         viewModel.loading.observe(this, Observer { isLoading ->
             isLoading?.let {
-                loadingView.visibility = if (it) View.VISIBLE else View.GONE
+                loading_view.visibility = if (it) View.VISIBLE else View.GONE
                 if (it) {
-                    topVideosList.visibility = View.GONE
+                    top_videos_list.visibility = View.GONE
                 }
             }
         })
@@ -67,7 +65,7 @@ class HomeFragment : Fragment() {
             update(videoListItem)
             setOnItemClickListener(onItemClickListener)
         }
-        topVideosList.apply {
+        top_videos_list.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             adapter = topVideoListAdapter
@@ -93,8 +91,8 @@ class HomeFragment : Fragment() {
     private fun setRecyclerViewScrollListener() {
         object : RecyclerView.OnScrollListener() {
         }
-        val totalCount = topVideosList.adapter?.itemCount
-        val childCount = topVideosList.childCount
+        val totalCount = top_videos_list.adapter?.itemCount
+        val childCount = top_videos_list.childCount
         val firstPosition = LinearLayoutManager(context).findFirstVisibleItemPosition()
         if (totalCount == childCount + firstPosition) {
             // ここでProgressBar表示させて次のページのリクエスト送りたい

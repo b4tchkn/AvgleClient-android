@@ -17,7 +17,6 @@ import com.batch.avgleclient.model.AvVideo
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.OnItemClickListener
-import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
 
@@ -28,11 +27,11 @@ class HomeFragment : Fragment() {
 
     private val loadingItem = LoadingItem()
 
-    lateinit var scrollListener: EndlessScrollListener
+    private lateinit var scrollListener: EndlessScrollListener
 
     private val onItemClickListener = OnItemClickListener { item, view ->
         val index = this.topVideoListAdapter.getAdapterPosition(item)
-        val videoUrl = viewModel.topVideos.value!![index].videoUrl
+        val videoUrl = viewModel.topVideos.value?.get(index)?.videoUrl ?: return@OnItemClickListener
         val tabsIntent = CustomTabsIntent.Builder()
             .setShowTitle(true)
             .setToolbarColor(view.context.getColor(R.color.colorAccent))
@@ -60,13 +59,12 @@ class HomeFragment : Fragment() {
         viewModel.loading.value = true
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        binding.refreshLayout.isRefreshing = false
         initRecyclerView()
         binding.refreshLayout.setOnRefreshListener {
             viewModel.loading.value = true
             topVideoListAdapter.clear()
             viewModel.init()
-            binding.refreshLayout.isRefreshing = true
+            viewModel.isRefreshing.value = true
         }
         viewModel.init()
     }
@@ -74,7 +72,6 @@ class HomeFragment : Fragment() {
     private fun observeVideos() {
         viewModel.topVideos.observe(this, Observer {
             viewModel.loading.value = false
-            binding.refreshLayout.isRefreshing = false
             scrollListener.loading = false
             topVideoListAdapter.apply {
                 if (itemCount > 0 && getItemViewType(itemCount - 1) == loadingItem.viewType) {

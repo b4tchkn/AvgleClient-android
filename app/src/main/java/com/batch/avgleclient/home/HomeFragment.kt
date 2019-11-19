@@ -27,11 +27,11 @@ class HomeFragment : Fragment() {
 
     private val loadingItem = LoadingItem()
 
-    lateinit var scrollListener: EndlessScrollListener
+    private lateinit var scrollListener: EndlessScrollListener
 
     private val onItemClickListener = OnItemClickListener { item, view ->
         val index = this.topVideoListAdapter.getAdapterPosition(item)
-        val videoUrl = viewModel.topVideos.value!![index].videoUrl
+        val videoUrl = viewModel.topVideos.value?.get(index)?.videoUrl ?: return@OnItemClickListener
         val tabsIntent = CustomTabsIntent.Builder()
             .setShowTitle(true)
             .setToolbarColor(view.context.getColor(R.color.colorAccent))

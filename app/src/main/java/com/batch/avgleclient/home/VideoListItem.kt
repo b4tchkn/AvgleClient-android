@@ -38,6 +38,14 @@ class VideoListItem(private val videoList: AvVideo.Response.Videos) :
         val addUnixTime = videoList.addTime.toLong()
         val diff = calcTimeDiff(currentUnixTime - addUnixTime)
         viewBinding.addTime = diff
+
+        if (videoList.likes != 0) {
+            val bunshi = videoList.likes.toDouble()
+            val bunbo = (videoList.likes + videoList.dislikes).toDouble()
+            viewBinding.like = ((bunshi/bunbo) * 100).toInt().toString() + "%"
+        } else {
+            viewBinding.like = "0%"
+        }
     }
 
     private fun calcTimeDiff(timeInUnix: Long): String {

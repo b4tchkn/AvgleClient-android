@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="video"
             type="com.batch.avgleclient.model.AvVideo.Response.Videos" />
@@ -11,11 +12,16 @@
         <variable
             name="listener"
             type="com.batch.avgleclient.category.CategoryClickListener" />
+
         <variable
             name="duration"
             type="String" />
+
         <variable
             name="addTime"
+            type="String" />
+        <variable
+            name="like"
             type="String" />
     </data>
 
@@ -28,40 +34,46 @@
         android:background="#000000"
         android:foreground="@drawable/ripple"
         android:orientation="vertical">
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:imageUrl="@{video.previewUrl}"
                 android:foreground="@drawable/video_item_shadow"
+                android:imageUrl="@{video.previewUrl}"
                 android:scaleType="centerCrop"
-                android:src="@drawable/noimage"/>
+                android:src="@drawable/noimage" />
+
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/ic_play_arrow"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:src="@drawable/ic_play_arrow" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:shadowRadius="@android:integer/config_longAnimTime"
-                android:background="@drawable/rounded_corner_text_view"
                 android:layout_gravity="right|bottom"
-                android:layout_margin="4dp"
-                android:paddingRight="4dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/rounded_corner_text_view"
                 android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:shadowRadius="@android:integer/config_longAnimTime"
+                android:text="@{duration}"
                 android:textColor="#FFFFFF"
                 android:textSize="12sp"
-                android:text="@{duration}"
-                tools:text="00:00"/>
+                tools:text="00:00" />
         </FrameLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="8dp">
+            android:layout_margin="8dp"
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/shortName"
                 android:layout_width="match_parent"
@@ -71,37 +83,64 @@
                 android:textColor="#FFFFFF"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                tools:text="Video Title"/>
+                tools:text="Video Title" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
                 android:text="@{video.keyword}"
                 android:textColor="#e0e0e0"
                 android:textSize="12sp"
-                android:singleLine="true"
-                tools:text="keyword"/>
+                tools:text="keyword" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#e0e0e0"
+                    android:layout_height="match_parent"
                     android:text="@{Integer.toString(video.viewNumber)+@string/views}"
+                    android:textColor="#e0e0e0"
                     android:textSize="12sp"
                     tools:text="1000views" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#e0e0e0"
-                    android:text="@string/separate_dot"/>
+                    android:text="@string/separate_dot"
+                    android:textColor="#e0e0e0" />
+
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#e0e0e0"
+                    android:layout_height="match_parent"
                     android:text="@{addTime}"
+                    android:textColor="#e0e0e0"
                     android:textSize="12sp"
-                    tools:text="1 hours ago"/>
+                    tools:text="1 hours ago" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:gravity="center_vertical|end">
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:src="@drawable/ic_favorite"
+                        android:layout_marginEnd="5dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textColor="#e0e0e0"
+                        android:text="@{like}"
+                        android:textSize="12sp"
+                        android:gravity="center_vertical"
+                        tools:text="100%" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

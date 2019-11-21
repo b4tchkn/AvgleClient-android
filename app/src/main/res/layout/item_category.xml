@@ -17,7 +17,7 @@
     <FrameLayout
         android:id="@+id/categoryItemView"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         android:orientation="vertical"
         android:foreground="@drawable/ripple"
         android:paddingLeft="4dp"
@@ -26,7 +26,7 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="match_parent"
             android:imageUrl="@{category.coverUrl}"
             android:scaleType="centerCrop"
             android:src="@drawable/noimage" />

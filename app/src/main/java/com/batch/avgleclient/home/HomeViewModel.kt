@@ -29,13 +29,11 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     fun fetchNext(page: Int) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                try {
-                    val videos = api.getAvVideos(page).response.videos
-                    topVideos.postValue(videos)
-                } catch (e: Exception) {
-                    e.stackTrace
-                }
+            try {
+                val videos = api.getAvVideos(page).response.videos
+                topVideos.postValue(videos)
+            } catch (e: Exception) {
+                e.stackTrace
             }
         }
     }

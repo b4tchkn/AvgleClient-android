@@ -14,6 +14,9 @@
         <variable
             name="duration"
             type="String" />
+        <variable
+            name="addTime"
+            type="String" />
     </data>
 
     <LinearLayout
@@ -41,7 +44,6 @@
                 android:src="@drawable/ic_play_arrow"
                 android:layout_gravity="center"/>
             <TextView
-                android:id="@+id/duration_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:shadowRadius="@android:integer/config_longAnimTime"
@@ -78,13 +80,29 @@
                 android:textSize="12sp"
                 android:singleLine="true"
                 tools:text="keyword"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#e0e0e0"
-                android:text="@{Integer.toString(video.viewNumber)+@string/views}"
-                android:textSize="12sp"
-                tools:text="1000views" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#e0e0e0"
+                    android:text="@{Integer.toString(video.viewNumber)+@string/views}"
+                    android:textSize="12sp"
+                    tools:text="1000views" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#e0e0e0"
+                    android:text="@string/separate_dot"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#e0e0e0"
+                    android:text="@{addTime}"
+                    android:textSize="12sp"
+                    tools:text="1 hours ago"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </layout>

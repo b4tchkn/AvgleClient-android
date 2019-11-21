@@ -7,6 +7,7 @@
     <string name="movieCount">動画数：</string>
     <string name="ponn">本</string>
     <string name="views">" "views</string>
+    <string name="separate_dot">・</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

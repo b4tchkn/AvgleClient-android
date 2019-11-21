@@ -11,6 +11,9 @@
         <variable
             name="listener"
             type="com.batch.avgleclient.category.CategoryClickListener" />
+        <variable
+            name="duration"
+            type="String" />
     </data>
 
     <LinearLayout
@@ -38,6 +41,7 @@
                 android:src="@drawable/ic_play_arrow"
                 android:layout_gravity="center"/>
             <TextView
+                android:id="@+id/duration_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:shadowRadius="@android:integer/config_longAnimTime"
@@ -48,7 +52,7 @@
                 android:paddingLeft="4dp"
                 android:textColor="#FFFFFF"
                 android:textSize="12sp"
-                android:text="@{Float.toString(video.duration/60)}"
+                android:text="@{duration}"
                 tools:text="00:00"/>
         </FrameLayout>
         <LinearLayout
@@ -70,14 +74,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{video.keyword}"
-                android:textColor="#FFFFFF"
+                android:textColor="#e0e0e0"
+                android:textSize="12sp"
                 android:singleLine="true"
                 tools:text="keyword"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
+                android:textColor="#e0e0e0"
                 android:text="@{Integer.toString(video.viewNumber)+@string/views}"
+                android:textSize="12sp"
                 tools:text="1000views" />
         </LinearLayout>
     </LinearLayout>

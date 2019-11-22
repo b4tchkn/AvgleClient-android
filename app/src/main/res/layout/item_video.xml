@@ -45,7 +45,7 @@
                 android:foreground="@drawable/video_item_shadow"
                 android:imageUrl="@{video.previewUrl}"
                 android:scaleType="centerCrop"
-                android:src="@drawable/noimage" />
+                android:src="@drawable/common_logo" />
 
             <ImageView
                 android:layout_width="60dp"

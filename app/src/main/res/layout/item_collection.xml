@@ -15,41 +15,43 @@
         android:id="@+id/itemCollectionCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:background="@color/colorPrimaryDark"
+        android:layout_margin="8dp"
         app:cardCornerRadius="4dp">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
+
             <ImageView
+                android:id="@+id/collection_item_image"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
+                android:scaleType="center"
                 android:imageUrl="@{collection.coverUrl}"
-                android:src="@drawable/noimage"
-                android:layout_gravity="center">
-            </ImageView>
+                android:src="@drawable/common_logo" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="#2F496E">
+                android:orientation="vertical"
+                android:background="@color/colorPrimaryDark">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{collection.title}"
-                    android:textSize="15sp"
                     android:textColor="#FFFFFF"
-                    tools:text="title">
-                </TextView>
+                    android:textSize="30sp"
+                    android:singleLine="true"
+                    tools:text="title" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="end"
                     android:text="@{Integer.toString(collection.videoCount)+@string/ponn}"
-                    android:gravity="right"
                     android:textColor="#FFFFFF"
-                    tools:text="videocount"></TextView>
+                    tools:text="videocount" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

@@ -11,5 +11,6 @@ import com.bumptech.glide.request.RequestOptions
 fun ImageView.loadImage(url: String?) {
     Glide.with(context)
         .load(url)
+        .placeholder(R.drawable.common_logo)
         .into(this)
 }

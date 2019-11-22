@@ -4,12 +4,6 @@ import com.batch.avgleclient.R
 import com.batch.avgleclient.databinding.ItemVideoBinding
 import com.batch.avgleclient.model.AvVideo
 import com.xwray.groupie.databinding.BindableItem
-import timber.log.Timber
-import java.sql.Timestamp
-import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.temporal.ChronoUnit
-import java.util.*
 import kotlin.math.floor
 import kotlin.math.round
 

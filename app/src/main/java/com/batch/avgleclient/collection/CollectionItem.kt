@@ -11,6 +11,17 @@ class CollectionItem(private val collection: AvCollection.Response.Collection) :
 
     override fun bind(viewBinding: ItemCollectionBinding, position: Int) {
         viewBinding.collection = collection
+        var totalViewsNumber = collection.totalViews
+        if (totalViewsNumber > 1000) {
+            val viewK = collection.totalViews.toFloat() / 1000
+            viewBinding.totalViews = String.format("%.1f", viewK) + "K"
+            if (totalViewsNumber > 1000000) {
+                val viewM = collection.totalViews.toFloat() / 1000000
+                viewBinding.totalViews = String.format("%.1f", viewM) + "M"
+            }
+        } else {
+            viewBinding.totalViews = totalViewsNumber.toString()
+        }
     }
     // gridにするとき
     override fun getSpanSize(spanCount: Int, position: Int) = spanCount / 2

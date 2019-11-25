@@ -34,7 +34,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:scaleType="center"
-                    android:foreground="@drawable/video_item_shadow"
+                    android:foreground="@drawable/gradation"
                     android:imageUrl="@{collection.coverUrl}"
                     android:src="@drawable/common_logo" />
                 <LinearLayout

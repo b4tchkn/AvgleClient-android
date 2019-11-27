@@ -10,8 +10,8 @@
             type="com.batch.avgleclient.model.AvCategory.Response.Category" />
 
         <variable
-            name="listener"
-            type="com.batch.avgleclient.category.CategoryClickListener" />
+            name="itemClickListener"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <FrameLayout
@@ -22,7 +22,8 @@
         android:foreground="@drawable/ripple"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
-        android:paddingTop="2dp">
+        android:paddingTop="2dp"
+        android:onClick="@{itemClickListener}">
 
         <ImageView
             android:layout_width="match_parent"

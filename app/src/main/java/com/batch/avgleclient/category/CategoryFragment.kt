@@ -5,17 +5,20 @@ import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.net.toUri
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.batch.avgleclient.R
+import com.batch.avgleclient.model.AvCategory
 import kotlinx.android.synthetic.main.fragment_category.*
 
-class CategoryFragment : Fragment() {
+class CategoryFragment : Fragment(), CategoryListController.ClickListener {
     private lateinit var viewModel: CategoryViewModel
 //    private var categoryAdapter = CategoryAdapter(arrayListOf())
 
-    private val controller by lazy { CategoryListController() }
+    private val controller by lazy { CategoryListController(this) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,5 +56,13 @@ class CategoryFragment : Fragment() {
                 }
             }
         })
+    }
+
+    override fun itemClickListener(item: AvCategory.Response.Category) {
+        val tabsIntent = CustomTabsIntent.Builder()
+            .setShowTitle(true)
+            .setToolbarColor(context?.getColor(R.color.colorAccent)!!)
+            .build()
+        tabsIntent.launchUrl(context, item.categoryUrl.toUri())
     }
 }

@@ -1,18 +1,22 @@
 package com.batch.avgleclient.category
 
+import android.view.View
 import com.airbnb.epoxy.TypedEpoxyController
-import com.batch.avgleclient.ItemCategoryBindingModel_
 import com.batch.avgleclient.itemCategory
 import com.batch.avgleclient.model.AvCategory
 
-class CategoryListController : TypedEpoxyController<List<AvCategory.Response.Category>>() {
+class CategoryListController(val callback: ClickListener) : TypedEpoxyController<List<AvCategory.Response.Category>>() {
 
+    interface ClickListener {
+        fun itemClickListener(item: AvCategory.Response.Category)
+    }
 
     override fun buildModels(data: List<AvCategory.Response.Category>) {
-        data.forEach {
+        data.forEach { category ->
             itemCategory {
-                id(it.uuid)
-                category(it)
+                id(category.uuid)
+                category(category)
+                itemClickListener(View.OnClickListener { callback.itemClickListener(category) })
             }
         }
         // この書き方もある

@@ -13,7 +13,10 @@ import kotlinx.android.synthetic.main.fragment_category.*
 
 class CategoryFragment : Fragment() {
     private lateinit var viewModel: CategoryViewModel
-    private var categoryAdapter = CategoryAdapter(arrayListOf())
+//    private var categoryAdapter = CategoryAdapter(arrayListOf())
+
+    private val controller by lazy { CategoryListController() }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,7 +31,8 @@ class CategoryFragment : Fragment() {
         viewModel.refresh()
         categoriesList.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = categoryAdapter
+//            adapter = categoryAdapter
+            adapter = controller.adapter
         }
         observeViewModel()
     }
@@ -37,7 +41,8 @@ class CategoryFragment : Fragment() {
         viewModel.categories.observe(this, Observer { categories ->
             categories?.let {
                 categoriesList.visibility = View.VISIBLE
-                categoryAdapter.updateCategoryList(categories)
+                controller.setData(categories)
+//                categoryAdapter.updateCategoryList(categories)
             }
         })
         viewModel.loading.observe(this, Observer { isLoading ->

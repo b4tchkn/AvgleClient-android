@@ -10,10 +10,6 @@
             type="com.batch.avgleclient.model.AvVideo.Response.Videos" />
 
         <variable
-            name="listener"
-            type="com.batch.avgleclient.category.CategoryClickListener" />
-
-        <variable
             name="duration"
             type="String" />
 

@@ -23,6 +23,7 @@ class CollectionItem(private val collection: AvCollection.Response.Collection) :
             viewBinding.totalViews = totalViewsNumber.toString()
         }
     }
+
     // gridにするとき
     override fun getSpanSize(spanCount: Int, position: Int) = spanCount / 2
 }

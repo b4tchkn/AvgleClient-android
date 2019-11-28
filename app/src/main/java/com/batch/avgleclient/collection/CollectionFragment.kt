@@ -15,7 +15,9 @@ import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_collection.*
 
 class CollectionFragment : Fragment() {
+
     private lateinit var viewModel: CollectionViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,7 +34,6 @@ class CollectionFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.collections.observe(this, Observer {
-//            initRecyclerView()
             initRecyclerView(it.toCollectionItem())
         })
     }
@@ -44,7 +45,6 @@ class CollectionFragment : Fragment() {
             addAll(collectionItem)
         }
         collectionRecyclerView.apply {
-            //layoutManager = LinearLayoutManager(context)
             layoutManager = GridLayoutManager(context, cAdapter.spanCount).apply {
                 spanSizeLookup = cAdapter.spanSizeLookup
             }

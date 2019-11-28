@@ -15,9 +15,8 @@ import com.batch.avgleclient.model.AvCategory
 import kotlinx.android.synthetic.main.fragment_category.*
 
 class CategoryFragment : Fragment(), CategoryListController.ClickListener {
-    private lateinit var viewModel: CategoryViewModel
-//    private var categoryAdapter = CategoryAdapter(arrayListOf())
 
+    private lateinit var viewModel: CategoryViewModel
     private val controller by lazy { CategoryListController(this) }
 
     override fun onCreateView(
@@ -34,7 +33,6 @@ class CategoryFragment : Fragment(), CategoryListController.ClickListener {
         viewModel.refresh()
         categoriesList.apply {
             layoutManager = LinearLayoutManager(context)
-//            adapter = categoryAdapter
             adapter = controller.adapter
         }
         observeViewModel()
@@ -45,7 +43,6 @@ class CategoryFragment : Fragment(), CategoryListController.ClickListener {
             categories?.let {
                 categoriesList.visibility = View.VISIBLE
                 controller.setData(categories)
-//                categoryAdapter.updateCategoryList(categories)
             }
         })
         viewModel.loading.observe(this, Observer { isLoading ->

@@ -9,6 +9,7 @@ import kotlin.math.round
 
 class VideoListItem(private val videoList: AvVideo.Response.Videos) :
     BindableItem<ItemVideoBinding>() {
+
     override fun getLayout() = R.layout.item_video
 
     override fun bind(viewBinding: ItemVideoBinding, position: Int) {
@@ -27,12 +28,10 @@ class VideoListItem(private val videoList: AvVideo.Response.Videos) :
             viewBinding.duration =
                 "${String.format("%02d", mm.toInt())}:${String.format("%02d", ss.toInt())}"
         }
-
         val currentUnixTime = System.currentTimeMillis() / 1000
         val addUnixTime = videoList.addTime.toLong()
         val diff = calcTimeDiff(currentUnixTime - addUnixTime)
         viewBinding.addTime = diff
-
         if (videoList.likes != 0) {
             val bunshi = videoList.likes.toDouble()
             val bunbo = (videoList.likes + videoList.dislikes).toDouble()

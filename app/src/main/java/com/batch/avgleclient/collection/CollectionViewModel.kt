@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 import java.lang.Exception
 
 class CollectionViewModel(application: Application) : AndroidViewModel(application) {
+
     val collections = MutableLiveData<List<AvCollection.Response.Collection>>()
     private val api = AvRepository(application.applicationContext.getString(R.string.API_AVGLE_URL))
     private val scope = CoroutineScope(Dispatchers.Main)

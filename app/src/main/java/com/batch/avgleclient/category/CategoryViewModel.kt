@@ -19,6 +19,7 @@ import kotlinx.coroutines.launch
 import java.lang.Exception
 
 class CategoryViewModel(application: Application) : AndroidViewModel(application) {
+
     var categories = MutableLiveData<List<AvCategory.Response.Category>>()
     val loading = MutableLiveData<Boolean>()
     private var refreshTime = 5 * 60 * 1000 * 1000 * 1000L

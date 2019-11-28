@@ -22,13 +22,9 @@ class HomeFragment : Fragment() {
 
     private lateinit var viewModel: HomeViewModel
     private val topVideoListAdapter = GroupAdapter<GroupieViewHolder>()
-
     private lateinit var binding: FragmentHomeBinding
-
     private val loadingItem = LoadingItem()
-
     private lateinit var scrollListener: EndlessScrollListener
-
     private val onItemClickListener = OnItemClickListener { item, view ->
         val index = this.topVideoListAdapter.getAdapterPosition(item)
         val videoUrl = viewModel.topVideos.value?.get(index)?.videoUrl ?: return@OnItemClickListener

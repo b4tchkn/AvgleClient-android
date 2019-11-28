@@ -5,7 +5,7 @@ import com.airbnb.epoxy.TypedEpoxyController
 import com.batch.avgleclient.itemCategory
 import com.batch.avgleclient.model.AvCategory
 
-class CategoryListController(val callback: ClickListener) : TypedEpoxyController<List<AvCategory.Response.Category>>() {
+class CategoryListController(private val callback: ClickListener) : TypedEpoxyController<List<AvCategory.Response.Category>>() {
 
     interface ClickListener {
         fun itemClickListener(item: AvCategory.Response.Category)

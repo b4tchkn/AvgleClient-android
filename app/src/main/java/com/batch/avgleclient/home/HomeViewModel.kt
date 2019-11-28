@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
+
     var topVideos = MutableLiveData<List<AvVideo.Response.Videos>>()
     val loading = MutableLiveData<Boolean>()
     val isRefreshing = MediatorLiveData<Boolean>()

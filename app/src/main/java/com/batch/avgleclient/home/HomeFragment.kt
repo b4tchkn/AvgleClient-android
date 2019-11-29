@@ -18,13 +18,14 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.OnItemClickListener
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), VideoListController.ClickListener {
 
     private lateinit var viewModel: HomeViewModel
     private val topVideoListAdapter = GroupAdapter<GroupieViewHolder>()
     private lateinit var binding: FragmentHomeBinding
     private val loadingItem = LoadingItem()
     private lateinit var scrollListener: EndlessScrollListener
+    private val controller by lazy { VideoListController(this) }
     private val onItemClickListener = OnItemClickListener { item, view ->
         val index = this.topVideoListAdapter.getAdapterPosition(item)
         val videoUrl = viewModel.topVideos.value?.get(index)?.videoUrl ?: return@OnItemClickListener
@@ -69,13 +70,14 @@ class HomeFragment : Fragment() {
         viewModel.topVideos.observe(this, Observer {
             viewModel.loading.value = false
             scrollListener.loading = false
-            topVideoListAdapter.apply {
-                if (itemCount > 0 && getItemViewType(itemCount - 1) == loadingItem.viewType) {
-                    remove(loadingItem)
-                }
-                addAll(it.toVideoListItem())
-                setOnItemClickListener(onItemClickListener)
-            }
+            controller.setData(it)
+//            topVideoListAdapter.apply {
+//                if (itemCount > 0 && getItemViewType(itemCount - 1) == loadingItem.viewType) {
+//                    remove(loadingItem)
+//                }
+//                addAll(it.toVideoListItem())
+//                setOnItemClickListener(onItemClickListener)
+//            }
         })
     }
 
@@ -88,16 +90,25 @@ class HomeFragment : Fragment() {
         }
         scrollListener = EndlessScrollListener(manager, loadMore)
         binding.topVideosList.apply {
-            layoutManager = manager
+//            layoutManager = manager
             setHasFixedSize(true)
-            adapter = topVideoListAdapter
-            addOnScrollListener(scrollListener)
+//            adapter = topVideoListAdapter
+            setController(controller)
+//            addOnScrollListener(scrollListener)
         }
     }
 
-    private fun List<AvVideo.Response.Videos>.toVideoListItem(): List<VideoListItem> {
-        return this.map {
-            VideoListItem(it)
-        }
+//    private fun List<AvVideo.Response.Videos>.toVideoListItem(): List<VideoListItem> {
+//        return this.map {
+//            VideoListItem(it)
+//        }
+//    }
+
+    override fun itemClickListener(item: AvVideo.Response.Videos) {
+        val tabsIntent = CustomTabsIntent.Builder()
+            .setShowTitle(true)
+            .setToolbarColor(requireContext().getColor(R.color.colorAccent))
+            .build()
+        tabsIntent.launchUrl(requireContext(), item.videoUrl.toUri())
     }
 }

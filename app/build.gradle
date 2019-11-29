@@ -100,4 +100,7 @@ dependencies {
     implementation "com.airbnb.android:epoxy:$epoxyVersion"
     kapt "com.airbnb.android:epoxy-processor:$epoxyVersion"
     implementation "com.airbnb.android:epoxy-databinding:$epoxyVersion"
+
+    // threetenABP
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
 }

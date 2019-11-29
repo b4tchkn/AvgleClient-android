@@ -58,8 +58,8 @@ class CategoryFragment : Fragment(), CategoryListController.ClickListener {
     override fun itemClickListener(item: AvCategory.Response.Category) {
         val tabsIntent = CustomTabsIntent.Builder()
             .setShowTitle(true)
-            .setToolbarColor(context?.getColor(R.color.colorAccent)!!)
+            .setToolbarColor(requireContext().getColor(R.color.colorAccent))
             .build()
-        tabsIntent.launchUrl(context, item.categoryUrl.toUri())
+        tabsIntent.launchUrl(requireContext(), item.categoryUrl.toUri())
     }
 }

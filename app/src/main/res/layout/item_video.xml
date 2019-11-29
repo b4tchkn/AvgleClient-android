@@ -10,15 +10,8 @@
             type="com.batch.avgleclient.model.AvVideo.Response.Videos" />
 
         <variable
-            name="duration"
-            type="String" />
-
-        <variable
-            name="addTime"
-            type="String" />
-        <variable
-            name="like"
-            type="String" />
+            name="itemClickListener"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <LinearLayout
@@ -28,7 +21,8 @@
         android:layout_marginBottom="5dp"
         android:background="#000000"
         android:foreground="@drawable/ripple"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:onClick="@{itemClickListener}">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -57,7 +51,7 @@
                 android:paddingLeft="4dp"
                 android:paddingRight="4dp"
                 android:shadowRadius="@android:integer/config_longAnimTime"
-                android:text="@{duration}"
+                app:duration="@{video.duration}"
                 android:textColor="#FFFFFF"
                 android:textSize="12sp"
                 tools:text="00:00" />
@@ -95,7 +89,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@{Integer.toString(video.viewNumber)+@string/views}"
+                    app:views="@{video.viewNumber}"
                     android:textColor="#e0e0e0"
                     android:textSize="12sp"
                     tools:text="1000views" />
@@ -109,7 +103,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@{addTime}"
+                    app:addTime="@{video.addTime}"
                     android:textColor="#e0e0e0"
                     android:textSize="12sp"
                     tools:text="1 hours ago" />
@@ -129,8 +123,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        app:likes="@{video.likes}"
+                        app:dislikes="@{video.dislikes}"
                         android:textColor="#e0e0e0"
-                        android:text="@{like}"
                         android:textSize="12sp"
                         android:gravity="center_vertical"
                         tools:text="100%" />

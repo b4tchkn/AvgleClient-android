@@ -9,7 +9,7 @@
         tools:context=".category.CategoryFragment">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/categoriesList"
+            android:id="@+id/categories_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/item_category"
@@ -19,7 +19,7 @@
             app:layout_constraintTop_toTopOf="parent">
         </androidx.recyclerview.widget.RecyclerView>
         <ProgressBar
-            android:id="@+id/loadingView"
+            android:id="@+id/loading_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"

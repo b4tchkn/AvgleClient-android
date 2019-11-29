@@ -22,7 +22,6 @@
     </data>
 
     <LinearLayout
-        android:id="@+id/categoryCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -71,7 +70,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/shortName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"

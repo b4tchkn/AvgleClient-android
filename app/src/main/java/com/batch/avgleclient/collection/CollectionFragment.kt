@@ -44,7 +44,7 @@ class CollectionFragment : Fragment() {
             spanCount = 2
             addAll(collectionItem)
         }
-        collectionRecyclerView.apply {
+        collection_list.apply {
             layoutManager = GridLayoutManager(context, cAdapter.spanCount).apply {
                 spanSizeLookup = cAdapter.spanSizeLookup
             }

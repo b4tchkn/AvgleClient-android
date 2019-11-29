@@ -31,7 +31,7 @@ class CategoryFragment : Fragment(), CategoryListController.ClickListener {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(CategoryViewModel::class.java)
         viewModel.refresh()
-        categoriesList.apply {
+        categories_list.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = controller.adapter
         }
@@ -41,15 +41,15 @@ class CategoryFragment : Fragment(), CategoryListController.ClickListener {
     private fun observeViewModel() {
         viewModel.categories.observe(this, Observer { categories ->
             categories?.let {
-                categoriesList.visibility = View.VISIBLE
+                categories_list.visibility = View.VISIBLE
                 controller.setData(categories)
             }
         })
         viewModel.loading.observe(this, Observer { isLoading ->
             isLoading?.let {
-                loadingView.visibility = if(it) View.VISIBLE else View.GONE
+                loading_view.visibility = if(it) View.VISIBLE else View.GONE
                 if (it) {
-                    categoriesList.visibility = View.GONE
+                    categories_list.visibility = View.GONE
                 }
             }
         })

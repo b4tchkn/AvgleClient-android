@@ -6,7 +6,7 @@
     android:background="@color/colorPrimary">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/collectionRecyclerView"
+        android:id="@+id/collection_list"
         tools:listitem="@layout/item_collection"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

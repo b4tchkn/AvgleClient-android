@@ -2,6 +2,7 @@ package com.batch.avgleclient.home
 
 import android.view.View
 import com.airbnb.epoxy.TypedEpoxyController
+import com.batch.avgleclient.itemLoading
 import com.batch.avgleclient.itemVideo
 import com.batch.avgleclient.model.AvVideo
 
@@ -19,7 +20,10 @@ class VideoListController(private val callback: ClickListener) : TypedEpoxyContr
                 video(video)
                 itemClickListener(View.OnClickListener { callback.itemClickListener(video) })
             }
+        }
 
+        itemLoading {
+            id("footer")
         }
     }
 }

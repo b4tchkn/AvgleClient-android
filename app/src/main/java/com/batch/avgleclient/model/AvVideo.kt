@@ -16,10 +16,10 @@ data class AvVideo(
         @Json(name = "current_offset")
         val currentOffset: Int,
         val limit: Int,
-        val videos: List<Videos>
+        val videos: List<Video>
     ) {
         @JsonClass(generateAdapter = true)
-        data class Videos(
+        data class Video(
             val title: String,
             val keyword: String,
             val channel: String,

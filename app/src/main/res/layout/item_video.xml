@@ -7,7 +7,7 @@
 
         <variable
             name="video"
-            type="com.batch.avgleclient.model.AvVideo.Response.Videos" />
+            type="com.batch.avgleclient.model.AvVideo.Response.Video" />
 
         <variable
             name="itemClickListener"

@@ -44,6 +44,7 @@ def customTabsVersion = '1.0.0'
 def groupieVersion = '2.7.0'
 def roomVersion = '2.1.0-rc01'
 def epoxyVersion = '3.8.0'
+def pagingVersion = '2.1.0'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -100,7 +101,11 @@ dependencies {
     implementation "com.airbnb.android:epoxy:$epoxyVersion"
     kapt "com.airbnb.android:epoxy-processor:$epoxyVersion"
     implementation "com.airbnb.android:epoxy-databinding:$epoxyVersion"
+    implementation "com.airbnb.android:epoxy-paging:$epoxyVersion"
 
     // threetenABP
     implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
+
+    // paging
+    implementation "androidx.paging:paging-runtime:$pagingVersion"
 }

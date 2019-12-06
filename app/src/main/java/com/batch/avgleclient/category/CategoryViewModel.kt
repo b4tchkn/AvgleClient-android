@@ -1,22 +1,16 @@
 package com.batch.avgleclient.category
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import androidx.room.Database
+import com.batch.avgleclient.R
 import com.batch.avgleclient.model.AvCategory
+import com.batch.avgleclient.model.AvCategoryDatabase
 import com.batch.avgleclient.repository.AvRepository
+import com.batch.avgleclient.utli.SharedPreferencesHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import com.batch.avgleclient.R
-import com.batch.avgleclient.model.AvCategoryDao
-import com.batch.avgleclient.model.AvCategoryDatabase
-import com.batch.avgleclient.utli.SharedPreferencesHelper
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 class CategoryViewModel(application: Application) : AndroidViewModel(application) {
 

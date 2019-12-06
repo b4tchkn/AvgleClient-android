@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.batch.avgleclient.R
 import com.batch.avgleclient.databinding.FragmentHomeBinding
 import com.batch.avgleclient.model.AvVideo
+import timber.log.Timber
 
 class HomeFragment : Fragment(), VideoListController.ClickListener {
 
@@ -41,8 +42,7 @@ class HomeFragment : Fragment(), VideoListController.ClickListener {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         binding.refreshLayout.setOnRefreshListener {
-            viewModel.isRefreshing.value = true
-            observeVideos()
+            viewModel.refresh()
         }
         initRecyclerView()
     }
@@ -50,6 +50,7 @@ class HomeFragment : Fragment(), VideoListController.ClickListener {
     private fun observeVideos() {
         viewModel.topVideos.observe(this, Observer {
             controller.submitList(it)
+            Timber.d("refreshpage")
         })
     }
 

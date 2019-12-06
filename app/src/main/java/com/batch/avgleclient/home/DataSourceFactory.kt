@@ -19,4 +19,8 @@ class DataSourceFactory(
         this.dataSource.postValue(dataSource)
         return dataSource
     }
+
+    fun invalidate() {
+        dataSource.value?.invalidate()
+    }
 }

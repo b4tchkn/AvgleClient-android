@@ -43,11 +43,6 @@ class VideoDataSource(
     ) {
     }
 
-    override fun invalidate() {
-        super.invalidate()
-        scope.cancel()
-    }
-
     private suspend fun callApi(
         page: Int,
         callback: (next: Int?, videos: List<AvVideo.Response.Video>) -> Unit

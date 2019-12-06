@@ -28,4 +28,8 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         }
         isRefreshing.addSource(loading, loadingObserver)
     }
+
+    fun refresh() {
+        factory.invalidate()
+    }
 }

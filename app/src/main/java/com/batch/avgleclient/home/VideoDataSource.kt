@@ -31,7 +31,7 @@ class VideoDataSource(
         callback: LoadCallback<Int, AvVideo.Response.Video>
     ) {
         scope.launch {
-            callApi(0) { next, videos ->
+            callApi(params.key) { next, videos ->
                 callback.onResult(videos, next)
             }
         }

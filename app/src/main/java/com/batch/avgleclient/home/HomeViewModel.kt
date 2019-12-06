@@ -12,8 +12,8 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     val topVideos: LiveData<PagedList<AvVideo.Response.Video>>
     private val api = AvRepository(application.applicationContext.getString(R.string.API_AVGLE_URL))
-    private val factory = DataSourceFactory(api, viewModelScope)
     val loading = MutableLiveData<Boolean>()
+    private val factory = DataSourceFactory(api, viewModelScope, loading)
     val isRefreshing = MediatorLiveData<Boolean>()
 
     init {

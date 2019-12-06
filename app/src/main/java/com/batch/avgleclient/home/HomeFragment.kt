@@ -24,6 +24,7 @@ class HomeFragment : Fragment(), VideoListController.ClickListener {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         observeVideos()
+        observeLoading()
     }
 
     override fun onCreateView(
@@ -37,20 +38,24 @@ class HomeFragment : Fragment(), VideoListController.ClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.loading.value = true
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         binding.refreshLayout.setOnRefreshListener {
-            viewModel.loading.value = true
             viewModel.isRefreshing.value = true
+            observeVideos()
         }
         initRecyclerView()
     }
 
     private fun observeVideos() {
         viewModel.topVideos.observe(this, Observer {
-            viewModel.loading.value = false
             controller.submitList(it)
+        })
+    }
+
+    private fun observeLoading() {
+        viewModel.loading.observe(this, Observer {
+            controller.isLoading = it
         })
     }
 

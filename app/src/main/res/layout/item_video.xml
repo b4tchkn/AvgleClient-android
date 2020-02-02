@@ -77,10 +77,12 @@
                     android:layout_weight="1"
                     tools:text="仕事中にも関わらず中出しSEXをしてしまった美女30人4時間BEST MDBK-083" />
                 <ImageButton
-                    android:layout_width="20dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:scaleType="centerInside"
                     android:tint="@color/colorSubText"
                     android:background="@null"
+                    android:foreground="@drawable/ripple"
                     android:src="@drawable/ic_more_vert"/>
             </LinearLayout>
 

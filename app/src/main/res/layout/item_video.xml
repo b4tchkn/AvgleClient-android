@@ -12,6 +12,9 @@
         <variable
             name="itemClickListener"
             type="android.view.View.OnClickListener" />
+        <variable
+            name="moreClickListener"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <LinearLayout
@@ -77,11 +80,13 @@
                     android:layout_weight="1"
                     tools:text="SSNI-647 橋本ありな - 一ヶ月間の禁欲の果てに彼女の親友と僕が浮気SEXだけに没頭した彼女不在の2日間。" />
                 <ImageButton
+                    android:id="@+id/button_more"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:scaleType="centerInside"
                     android:tint="@color/colorSubText"
                     android:background="@null"
+                    android:onClick="@{moreClickListener}"
                     android:foreground="@drawable/ripple_rounded_corners"
                     android:src="@drawable/ic_more_vert"/>
             </LinearLayout>

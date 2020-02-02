@@ -3,16 +3,21 @@ package com.batch.avgleclient.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.airbnb.epoxy.CallbackProp
 import com.batch.avgleclient.R
 import com.batch.avgleclient.databinding.FragmentHomeBinding
 import com.batch.avgleclient.model.AvVideo
+import kotlinx.android.synthetic.main.item_video.*
 import timber.log.Timber
 
 class HomeFragment : Fragment(), VideoListController.ClickListener {
@@ -50,7 +55,6 @@ class HomeFragment : Fragment(), VideoListController.ClickListener {
     private fun observeVideos() {
         viewModel.topVideos.observe(this, Observer {
             controller.submitList(it)
-            Timber.d("refreshpage")
         })
     }
 
@@ -73,5 +77,22 @@ class HomeFragment : Fragment(), VideoListController.ClickListener {
             .setToolbarColor(requireContext().getColor(R.color.colorAccent))
             .build()
         tabsIntent.launchUrl(requireContext(), item.videoUrl.toUri())
+    }
+
+    override fun moreClickListener(item: AvVideo.Response.Video) {
+        val popup = PopupMenu(requireContext(), button_more)
+        popup.menuInflater.inflate(R.menu.video_menu, popup.menu)
+        popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.watchlater -> {
+                    Toast.makeText(requireContext(), "Save to Watch later", Toast.LENGTH_SHORT).show()
+                }
+                R.id.playlist -> {
+                    Toast.makeText(requireContext(), "Save to playlist", Toast.LENGTH_SHORT).show()
+                }
+            }
+            true
+        })
+        popup.show()
     }
 }

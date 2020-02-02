@@ -17,8 +17,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#000000"
         android:foreground="@drawable/ripple"
+        android:background="#000000"
         android:orientation="vertical"
         android:onClick="@{itemClickListener}">
 
@@ -64,25 +64,25 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{video.title}"
                     android:textColor="#FFFFFF"
-                    android:singleLine="true"
+                    android:maxLines="2"
+                    android:ellipsize="end"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:layout_weight="1"
-                    tools:text="仕事中にも関わらず中出しSEXをしてしまった美女30人4時間BEST MDBK-083" />
+                    tools:text="SSNI-647 橋本ありな - 一ヶ月間の禁欲の果てに彼女の親友と僕が浮気SEXだけに没頭した彼女不在の2日間。" />
                 <ImageButton
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:scaleType="centerInside"
                     android:tint="@color/colorSubText"
                     android:background="@null"
-                    android:foreground="@drawable/ripple"
+                    android:foreground="@drawable/ripple_rounded_corners"
                     android:src="@drawable/ic_more_vert"/>
             </LinearLayout>
 

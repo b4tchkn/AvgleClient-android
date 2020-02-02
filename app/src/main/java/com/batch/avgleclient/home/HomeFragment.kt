@@ -2,12 +2,12 @@ package com.batch.avgleclient.home
 
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.PopupMenu
+import android.widget.PopupWindow
 import android.widget.Toast
+import androidx.appcompat.view.menu.MenuBuilder
+import androidx.appcompat.view.menu.MenuPopupHelper
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
@@ -80,9 +80,20 @@ class HomeFragment : Fragment(), VideoListController.ClickListener {
     }
 
     override fun moreClickListener(item: AvVideo.Response.Video) {
-        val popup = PopupMenu(requireContext(), button_more)
+//        val menuBuilder = MenuBuilder(requireContext())
+//        val inflater = MenuInflater(requireContext())
+//        inflater.inflate(R.menu.video_menu, menuBuilder)
+//        val optionMenu = MenuPopupHelper(requireContext(), menuBuilder)
+//        optionMenu.setForceShowIcon(true)
+//        menuBuilder.setCallback {
+//
+//        }
+
+
+        val backgroundColor = ContextThemeWrapper(requireContext(), R.style.PopupMenu)
+        val popup = PopupMenu(backgroundColor, button_more)
         popup.menuInflater.inflate(R.menu.video_menu, popup.menu)
-        popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+        popup.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.watchlater -> {
                     Toast.makeText(requireContext(), "Save to Watch later", Toast.LENGTH_SHORT).show()
@@ -92,7 +103,18 @@ class HomeFragment : Fragment(), VideoListController.ClickListener {
                 }
             }
             true
-        })
-        popup.show()
+        }
+        try {
+            val fieldMPop = PopupMenu::class.java.getDeclaredField("mPopup")
+            fieldMPop.isAccessible = true
+            val mPopup = fieldMPop.get(popup)
+            mPopup.javaClass
+                .getDeclaredMethod("setForceShowIcon", Boolean::class.java)
+                .invoke(mPopup, true)
+        } catch (e: Exception) {
+            Timber.e(e.toString())
+        } finally {
+            popup.show()
+        }
     }
 }

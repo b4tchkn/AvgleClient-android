@@ -11,7 +11,6 @@
     <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
         <item name="android:colorControlNormal">@color/colorAccent</item>
         <item name="android:textCursorDrawable">@color/colorAccent</item>
-        <item name="android:textColorHint">@android:color/white</item>
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/darker_gray</item>
     </style>
 </resources>

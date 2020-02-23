@@ -62,14 +62,14 @@
             app:theme="@style/EditTextStyle" />
 
         <Button
-            android:id="@+id/login_button"
+            android:id="@+id/signin_button"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="40dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="40dp"
             android:background="@drawable/button_background_rounded_corners"
-            android:text="@string/login"
+            android:text="@string/signin"
             android:textColor="@android:color/white"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -89,7 +89,7 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_button" />
+            app:layout_constraintTop_toBottomOf="@+id/signin_button" />
 
         <TextView
             android:id="@+id/text_orsignup"

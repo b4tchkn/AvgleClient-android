@@ -10,7 +10,7 @@
     <string name="separate_dot">・</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="login">LOGIN</string>
+    <string name="signin">SIGNIN</string>
     <string name="singup">SIGNUP</string>
     <string name="orsignup">or singnup with</string>
     <string name="welcome">Welcome to new world</string>

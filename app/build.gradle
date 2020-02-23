@@ -73,8 +73,10 @@ dependencies {
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
 
     // material
-    implementation 'com.google.android.material:material:1.2.0-alpha01'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
+
+    //  lifecycle
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
     // navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"

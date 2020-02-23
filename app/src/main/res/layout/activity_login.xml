@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/colorPrimaryDark"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        tools:context=".login.LoginActivity"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        tools:context=".login.LoginActivity">
 
         <ImageView
             android:id="@+id/image_logo"
@@ -33,48 +33,72 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image_logo" />
 
-        <EditText
-            android:id="@+id/email_edit_text"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:hint="@string/email"
-            android:textColor="@android:color/white"
+            android:textColorHint="@color/colorAccent"
+            app:errorEnabled="true"
+            app:errorTextColor="@color/error"
+            app:hintTextColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/welcome_text"
-            app:theme="@style/EditTextStyle" />
+            app:layout_constraintTop_toBottomOf="@+id/welcome_text">
 
-        <EditText
-            android:id="@+id/password_edit_text"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_text_input_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:textColor="@android:color/white"
+                android:theme="@style/EditTextStyle"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_password"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             android:hint="@string/password"
-            android:textColor="@android:color/white"
+            android:textColorHint="@color/colorAccent"
+            app:errorEnabled="true"
+            app:errorTextColor="@color/error"
+            app:hintEnabled="true"
+            app:hintTextColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/email_edit_text"
-            app:theme="@style/EditTextStyle" />
+            app:layout_constraintTop_toBottomOf="@+id/text_input_email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_text_input_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="@android:color/white"
+                android:theme="@style/EditTextStyle"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/signin_button"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="40dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="50dp"
             android:background="@drawable/button_background_rounded_corners"
             android:text="@string/signin"
             android:textColor="@android:color/white"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/password_edit_text" />
+            app:layout_constraintTop_toBottomOf="@+id/text_input_password" />
 
         <Button
             android:id="@+id/signup_button"
@@ -95,7 +119,7 @@
             android:id="@+id/text_orsignup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="80dp"
             android:text="@string/orsignup"
             android:textColor="@android:color/white"
             android:textSize="15sp"
@@ -107,39 +131,39 @@
             android:id="@+id/google_button"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginTop="16dp"
             android:background="#000000"
             android:scaleType="centerCrop"
-            android:layout_marginTop="16dp"
             android:src="@drawable/google_logo"
-            app:layout_constraintTop_toBottomOf="@id/text_orsignup"
             app:layout_constraintEnd_toStartOf="@+id/twitter_button"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_orsignup" />
 
         <ImageButton
             android:id="@+id/twitter_button"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginTop="16dp"
             android:background="#00000000"
             android:scaleType="centerCrop"
-            android:layout_marginTop="16dp"
 
             android:src="@drawable/twitter_logo"
-            app:layout_constraintTop_toBottomOf="@id/text_orsignup"
             app:layout_constraintEnd_toStartOf="@+id/facebook_button"
-            app:layout_constraintStart_toEndOf="@+id/google_button" />
+            app:layout_constraintStart_toEndOf="@+id/google_button"
+            app:layout_constraintTop_toBottomOf="@id/text_orsignup" />
 
         <ImageButton
             android:id="@+id/facebook_button"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginTop="16dp"
             android:background="#00000000"
             android:scaleType="centerCrop"
-            android:layout_marginTop="16dp"
 
             android:src="@drawable/facebook_logo"
-            app:layout_constraintTop_toBottomOf="@id/text_orsignup"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/twitter_button" />
+            app:layout_constraintStart_toEndOf="@+id/twitter_button"
+            app:layout_constraintTop_toBottomOf="@id/text_orsignup" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

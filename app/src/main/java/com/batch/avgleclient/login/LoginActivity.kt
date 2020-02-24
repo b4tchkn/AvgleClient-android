@@ -7,6 +7,7 @@ import android.text.TextUtils
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.batch.avgleclient.R
+import com.batch.avgleclient.signup.SignupActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -57,6 +58,10 @@ class LoginActivity : AppCompatActivity() {
         }
         google_button.setOnClickListener {
             signInWithGoogle()
+        }
+        signup_button.setOnClickListener {
+            val intent = SignupActivity.createIntent(this)
+            startActivity(intent)
         }
     }
 

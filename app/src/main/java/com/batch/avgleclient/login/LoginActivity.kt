@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.batch.avgleclient.R
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
@@ -12,6 +13,9 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private val viewModel: LoginViewModel by lazy {
+        ViewModelProvider(this).get(LoginViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +26,10 @@ class LoginActivity : AppCompatActivity() {
             val isPasswordEmpty = TextUtils.isEmpty(edit_text_input_password.text)
 
             if (!isEmailEmpty && !isPasswordEmpty) {
-                signInWithEmail()
+                viewModel.signInWithEmail(this,
+                    auth,
+                    edit_text_input_email.text.toString(),
+                    edit_text_input_password.text.toString())
                 text_input_email.error = null
                 text_input_password.error = null
             } else {
@@ -41,19 +48,5 @@ class LoginActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         val currentUser = auth.currentUser
-    }
-
-    private fun signInWithEmail() {
-        val email = edit_text_input_email.text.toString()
-        val password = edit_text_input_password.text.toString()
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    Toast.makeText(this, "Success!: ${user}", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this, "Failure", Toast.LENGTH_SHORT).show()
-                }
-            }
     }
 }

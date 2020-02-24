@@ -10,7 +10,7 @@
 
     <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
         <item name="android:colorControlNormal">@color/colorAccent</item>
-        <item name="android:textCursorDrawable">@color/colorAccent</item>
+        <item name="android:textCursorDrawable">@drawable/custom_cursor_drawable</item>
     </style>
 
 </resources>

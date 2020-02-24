@@ -21,6 +21,7 @@ class VideoListController(private val callback: ClickListener) :
 
     interface ClickListener {
         fun itemClickListener(item: AvVideo.Response.Video)
+        fun moreClickListener(item: AvVideo.Response.Video)
     }
 
     override fun buildItemModel(
@@ -33,6 +34,7 @@ class VideoListController(private val callback: ClickListener) :
                 video(it)
             }
             itemClickListener(View.OnClickListener { callback.itemClickListener(video()) })
+            moreClickListener(View.OnClickListener { callback.moreClickListener(video()) })
         }
     }
 

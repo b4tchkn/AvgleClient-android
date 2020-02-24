@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/watchlater"
+        android:icon="@drawable/clock_vector_icon"
+        android:title="@string/save_to_watchlater" />
+    <item
+        android:id="@+id/playlist"
+        android:icon="@drawable/ic_playlist_add"
+        android:title="@string/save_to_playlist" />
+</menu>

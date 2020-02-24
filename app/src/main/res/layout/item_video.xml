@@ -12,13 +12,16 @@
         <variable
             name="itemClickListener"
             type="android.view.View.OnClickListener" />
+        <variable
+            name="moreClickListener"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#000000"
         android:foreground="@drawable/ripple"
+        android:background="#000000"
         android:orientation="vertical"
         android:onClick="@{itemClickListener}">
 
@@ -58,25 +61,42 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:padding="8dp"
+            android:layout_marginBottom="16dp"
             android:orientation="vertical">
-
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:text="@{video.title}"
-                android:textColor="#FFFFFF"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                tools:text="Video Title" />
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{video.title}"
+                    android:textColor="#FFFFFF"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    tools:text="SSNI-647 橋本ありな - 一ヶ月間の禁欲の果てに彼女の親友と僕が浮気SEXだけに没頭した彼女不在の2日間。" />
+                <ImageButton
+                    android:id="@+id/button_more"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:scaleType="centerInside"
+                    android:tint="@color/colorSubText"
+                    android:background="@null"
+                    android:onClick="@{moreClickListener}"
+                    android:foreground="@drawable/ripple_rounded_corners"
+                    android:src="@drawable/ic_more_vert"/>
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:text="@{video.keyword}"
-                android:textColor="#e0e0e0"
+                android:textColor="@color/colorSubText"
                 android:textSize="12sp"
                 tools:text="keyword" />
 
@@ -88,7 +108,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     app:views="@{video.viewNumber}"
-                    android:textColor="#e0e0e0"
+                    android:textColor="@color/colorSubText"
                     android:textSize="12sp"
                     tools:text="1000views" />
 
@@ -96,13 +116,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/separate_dot"
-                    android:textColor="#e0e0e0" />
+                    android:textColor="@color/colorSubText" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     app:addTime="@{video.addTime}"
-                    android:textColor="#e0e0e0"
+                    android:textColor="@color/colorSubText"
                     android:textSize="12sp"
                     tools:text="1 hours ago" />
 
@@ -116,6 +136,7 @@
                         android:layout_width="15dp"
                         android:layout_height="15dp"
                         android:src="@drawable/ic_favorite"
+                        android:tint="@color/colorSubText"
                         android:layout_marginEnd="5dp"/>
 
                     <TextView
@@ -123,7 +144,7 @@
                         android:layout_height="match_parent"
                         app:likes="@{video.likes}"
                         app:dislikes="@{video.dislikes}"
-                        android:textColor="#e0e0e0"
+                        android:textColor="@color/colorSubText"
                         android:textSize="12sp"
                         android:gravity="center_vertical"
                         tools:text="100%" />

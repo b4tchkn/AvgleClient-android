@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import com.batch.avgleclient.MainActivity
 import com.batch.avgleclient.R
 import com.batch.avgleclient.signup.SignupActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -29,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        progress_bar.isVisible = false
         auth = FirebaseAuth.getInstance()
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -37,6 +40,7 @@ class LoginActivity : AppCompatActivity() {
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         signin_button.setOnClickListener {
+            updateUI(true)
             val isEmailEmpty = TextUtils.isEmpty(edit_text_input_email.text)
             val isPasswordEmpty = TextUtils.isEmpty(edit_text_input_password.text)
             if (!isEmailEmpty && !isPasswordEmpty) {
@@ -44,6 +48,7 @@ class LoginActivity : AppCompatActivity() {
                 text_input_email.error = null
                 text_input_password.error = null
             } else {
+                updateUI(false)
                 when (isEmailEmpty) {
                     true -> text_input_email.error = getString(R.string.is_empty)
                     false -> text_input_email.error = null
@@ -55,6 +60,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
         google_button.setOnClickListener {
+            updateUI(true)
             signInWithGoogle()
         }
         signup_button.setOnClickListener {
@@ -69,14 +75,14 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    updateUI(user)
+                    updateUI(false)
                 } else {
                     Toast.makeText(
                         applicationContext,
                         getString(R.string.please_retry),
                         Toast.LENGTH_SHORT
                     ).show()
+                    updateUI(false)
                 }
             }
     }
@@ -86,14 +92,14 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    updateUI(user)
+                    updateUI(false)
                 } else {
                     Toast.makeText(
                         applicationContext,
                         getString(R.string.please_retry),
                         Toast.LENGTH_SHORT
                     ).show()
+                    updateUI(false)
                 }
             }
     }
@@ -112,15 +118,22 @@ class LoginActivity : AppCompatActivity() {
                 firebaseAuthWithGoogle(account)
             } catch (e: ApiException) {
                 Timber.tag(TAG + "error").d(e.toString())
+                updateUI(false)
             }
         }
     }
 
-    private fun updateUI(user: FirebaseUser?) {
-        if (user != null) {
-            Timber.tag(TAG + "name").d(user.displayName)
-            Timber.tag(TAG + "mail").d(user.email)
-            Timber.tag(TAG + "photo").d(user.photoUrl.toString())
+    private fun updateUI(isProcessing: Boolean) {
+        progress_bar.isVisible = isProcessing
+        signin_button.isVisible = !isProcessing
+        signup_button.isVisible = !isProcessing
+        text_orsignup.isVisible = !isProcessing
+        google_button.isVisible = !isProcessing
+        val user = auth.currentUser
+        if (!isProcessing && user != null) {
+            val intent = MainActivity.createIntent(this)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            startActivity(intent)
         }
     }
 

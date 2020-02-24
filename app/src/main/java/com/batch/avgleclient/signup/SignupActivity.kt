@@ -9,6 +9,7 @@ import android.text.TextUtils
 import android.text.TextWatcher
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import com.batch.avgleclient.R
 import com.batch.avgleclient.login.LoginActivity
 import com.google.android.material.textfield.TextInputLayout
@@ -25,8 +26,10 @@ class SignupActivity : AppCompatActivity() {
         setContentView(R.layout.activity_signup)
 
         auth = FirebaseAuth.getInstance()
+        progress_bar.isVisible = false
 
         signup_button.setOnClickListener {
+            updateUI(true)
             val isEmailEmpty = TextUtils.isEmpty(edit_text_input_email.text)
             val isPassEmpty = TextUtils.isEmpty(edit_text_input_password.text)
             val isConfirmPassEmpty = TextUtils.isEmpty(edit_text_input_confirm_password.text)
@@ -41,12 +44,14 @@ class SignupActivity : AppCompatActivity() {
                         edit_text_input_confirm_password.text.toString()
                     ) {
                         if (!isEmailEmpty) {
+                            updateUI(false)
                             createAccount(
                                 edit_text_input_email.text.toString(),
                                 edit_text_input_password.text.toString()
                             )
                         }
                     } else {
+                        updateUI(false)
                         Toast.makeText(
                             applicationContext,
                             getText(R.string.incorrect_password),
@@ -54,6 +59,7 @@ class SignupActivity : AppCompatActivity() {
                         ).show()
                     }
                 }
+                false -> updateUI(false)
             }
         }
 
@@ -94,6 +100,7 @@ class SignupActivity : AppCompatActivity() {
                         getText(R.string.create_account_success),
                         Toast.LENGTH_SHORT
                     ).show()
+                    updateUI(false)
                 } else {
                     Timber.tag("SignupActivity").d(task.exception)
                     Toast.makeText(
@@ -101,8 +108,14 @@ class SignupActivity : AppCompatActivity() {
                         getText(R.string.create_account_failed),
                         Toast.LENGTH_SHORT
                     ).show()
+                    updateUI(false)
                 }
             }
+    }
+
+    private fun updateUI(isProcessing: Boolean) {
+            progress_bar.isVisible = isProcessing
+            signup_button.isVisible = !isProcessing
     }
 
     private fun displayIsEmptyError(isEmpty: Boolean, textView: TextInputLayout) {

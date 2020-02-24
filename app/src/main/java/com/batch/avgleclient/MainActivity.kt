@@ -1,5 +1,7 @@
 package com.batch.avgleclient
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -20,5 +22,9 @@ class MainActivity : AppCompatActivity() {
         )
 //        setupActionBarWithNavController(navigationController, appBarConfiguration)
         bottom_navigation_view.setupWithNavController(navigationController)
+    }
+
+    companion object {
+        fun createIntent(activity: Activity) = Intent(activity, MainActivity::class.java)
     }
 }

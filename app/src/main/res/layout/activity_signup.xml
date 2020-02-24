@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
             android:fontFamily="@font/roboto"
-            android:text="@string/create_accrount"
+            android:text="@string/create_account"
             android:textColor="@android:color/white"
             android:textSize="32sp"
             android:textStyle="bold"
@@ -70,7 +70,7 @@
                 android:id="@+id/edit_text_input_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
+                android:inputType="textPassword"
                 android:textColor="@android:color/white"
                 android:theme="@style/EditTextStyle" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -94,19 +94,19 @@
                 android:id="@+id/edit_text_input_confirm_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
+                android:inputType="textPassword"
                 android:textColor="@android:color/white"
                 android:theme="@style/EditTextStyle" />
         </com.google.android.material.textfield.TextInputLayout>
         <Button
-            android:id="@+id/signin_button"
+            android:id="@+id/signup_button"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="50dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="50dp"
             android:background="@drawable/button_background_rounded_corners"
-            android:text="@string/signin"
+            android:text="@string/singup"
             android:textColor="@android:color/white"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"

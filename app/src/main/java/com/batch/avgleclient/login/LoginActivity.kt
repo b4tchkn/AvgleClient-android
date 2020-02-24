@@ -1,5 +1,6 @@
 package com.batch.avgleclient.login
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,9 +24,6 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
-    private val viewModel: LoginViewModel by lazy {
-        ViewModelProvider(this).get(LoginViewModel::class.java)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -129,5 +127,6 @@ class LoginActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "AvLogin"
         private const val RC_SIGN_IN = 123
+        fun createIntent(activity: Activity) = Intent(activity, LoginActivity::class.java)
     }
 }

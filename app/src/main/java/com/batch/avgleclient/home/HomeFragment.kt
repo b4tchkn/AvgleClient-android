@@ -18,8 +18,6 @@ import kotlinx.android.synthetic.main.item_video.*
 
 class HomeFragment : Fragment(), VideoListController.ClickListener {
 
-
-    // ViewModelProviderを使った書き方
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
     private val controller by lazy { VideoListController(this) }

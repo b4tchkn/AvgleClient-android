@@ -90,51 +90,52 @@ class HomeFragment : Fragment(), VideoListController.ClickListener {
 //
 //        }
 
-
+        Toast.makeText(requireContext(), item.title, Toast.LENGTH_SHORT).show()
         val backgroundColor = ContextThemeWrapper(requireContext(), R.style.PopupMenu)
+//        val popup = PopupMenu(backgroundColor, button_more)
         val popup = PopupMenu(backgroundColor, button_more)
-        popup.menuInflater.inflate(R.menu.video_menu, popup.menu)
-        popup.setOnMenuItemClickListener { item ->
-            val user = auth.currentUser
-            when (item.itemId) {
+        popup.inflate(R.menu.video_menu)
+        popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item: MenuItem? ->
+            when (item?.itemId) {
                 R.id.watchlater -> {
-                    if (user != null) {
-                        Toast.makeText(
-                            requireContext(),
-                            "Save to Watch later: ${user?.uid}",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    } else {
-                        val intent = LoginActivity.createIntent(requireActivity())
-                        startActivity(intent)
-                    }
                 }
                 R.id.playlist -> {
-                    if (user != null) {
-                        Toast.makeText(
-                            requireContext(),
-                            "Save to playlist: $user",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    } else {
-                        val intent = LoginActivity.createIntent(requireActivity())
-                        startActivity(intent)
-                    }
                 }
             }
             true
-        }
-        try {
-            val fieldMPop = PopupMenu::class.java.getDeclaredField("mPopup")
-            fieldMPop.isAccessible = true
-            val mPopup = fieldMPop.get(popup)
-            mPopup.javaClass
-                .getDeclaredMethod("setForceShowIcon", Boolean::class.java)
-                .invoke(mPopup, true)
-        } catch (e: Exception) {
-            Timber.e(e.toString())
-        } finally {
-            popup.show()
-        }
+        })
+        popup.show()
+
+//        popup.menuInflater.inflate(R.menu.video_menu, popup.menu)
+//        popup.setOnMenuItemClickListener { item ->
+//            val user = auth.currentUser
+//            when (item.itemId) {
+//                R.id.watchlater -> {
+//                    if (user != null) {
+//                        Toast.makeText(
+//                            requireContext(),
+//                            "Save to Watch later: ${user?.uid}",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                    } else {
+//                        val intent = LoginActivity.createIntent(requireActivity())
+//                        startActivity(intent)
+//                    }
+//                }
+//                R.id.playlist -> {
+//                    if (user != null) {
+//                        Toast.makeText(
+//                            requireContext(),
+//                            "Save to playlist: $user",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                    } else {
+//                        val intent = LoginActivity.createIntent(requireActivity())
+//                        startActivity(intent)
+//                    }
+//                }
+//            }
+//            true
+//        }
     }
 }

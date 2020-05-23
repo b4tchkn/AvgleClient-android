@@ -46,5 +46,4 @@ class VideoListController(private val callback: ClickListener) :
             }
         }
     }
-
 }

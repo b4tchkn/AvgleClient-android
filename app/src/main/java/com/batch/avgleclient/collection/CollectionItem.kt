@@ -4,14 +4,16 @@ import com.batch.avgleclient.R
 import com.batch.avgleclient.databinding.ItemCollectionBinding
 import com.batch.avgleclient.model.AvCollection
 import com.xwray.groupie.databinding.BindableItem
+import timber.log.Timber
 
-class CollectionItem(private val collection: AvCollection.Response.Collection) : BindableItem<ItemCollectionBinding>() {
+class CollectionItem(private val collection: AvCollection.Response.Collection) :
+    BindableItem<ItemCollectionBinding>() {
 
     override fun getLayout() = R.layout.item_collection
 
     override fun bind(viewBinding: ItemCollectionBinding, position: Int) {
         viewBinding.collection = collection
-        var totalViewsNumber = collection.totalViews
+        val totalViewsNumber = collection.totalViews
         if (totalViewsNumber > 1000) {
             val viewK = collection.totalViews.toFloat() / 1000
             viewBinding.totalViews = String.format("%.1f", viewK) + "K"
@@ -21,6 +23,10 @@ class CollectionItem(private val collection: AvCollection.Response.Collection) :
             }
         } else {
             viewBinding.totalViews = totalViewsNumber.toString()
+        }
+
+        viewBinding.collectionCardItem.setOnClickListener {
+            Timber.d("oされたあああああああああああ${collection.title}")
         }
     }
 

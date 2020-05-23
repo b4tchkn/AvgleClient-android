@@ -8,21 +8,19 @@ import android.widget.Toast
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import com.batch.avgleclient.R
 import com.batch.avgleclient.databinding.FragmentHomeBinding
-import com.batch.avgleclient.login.LoginActivity
 import com.batch.avgleclient.model.AvVideo
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.item_video.*
-import timber.log.Timber
 
 class HomeFragment : Fragment(), VideoListController.ClickListener {
 
-    private val viewModel: HomeViewModel by lazy {
-        ViewModelProvider(this).get(HomeViewModel::class.java)
-    }
+
+    // ViewModelProviderを使った書き方
+    private val viewModel: HomeViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
     private val controller by lazy { VideoListController(this) }
     private lateinit var auth: FirebaseAuth
@@ -30,8 +28,6 @@ class HomeFragment : Fragment(), VideoListController.ClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         auth = FirebaseAuth.getInstance()
-        observeVideos()
-        observeLoading()
     }
 
     override fun onCreateView(
@@ -50,19 +46,21 @@ class HomeFragment : Fragment(), VideoListController.ClickListener {
         binding.refreshLayout.setOnRefreshListener {
             viewModel.refresh()
         }
+        observeVideos()
+        observeLoading()
         initRecyclerView()
     }
 
     private fun observeVideos() {
-        viewModel.topVideos.observe(this, Observer {
+        viewModel.topVideos.observe(viewLifecycleOwner) {
             controller.submitList(it)
-        })
+        }
     }
 
     private fun observeLoading() {
-        viewModel.loading.observe(this, Observer {
+        viewModel.loading.observe(viewLifecycleOwner) {
             controller.isLoading = it
-        })
+        }
     }
 
     private fun initRecyclerView() {

@@ -1,12 +1,12 @@
 package com.batch.avgleclient.collection
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.GridLayoutManager
 import com.batch.avgleclient.R
 import com.batch.avgleclient.model.AvCollection
@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_collection.*
 
 class CollectionFragment : Fragment() {
 
-    private lateinit var viewModel: CollectionViewModel
+    private val viewModel: CollectionViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,15 +27,14 @@ class CollectionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(CollectionViewModel::class.java)
         viewModel.fetchFromRemote(1)
         observeViewModel()
     }
 
     private fun observeViewModel() {
-        viewModel.collections.observe(this, Observer {
+        viewModel.collections.observe(viewLifecycleOwner) {
             initRecyclerView(it.toCollectionItem())
-        })
+        }
     }
 
     private fun initRecyclerView(collectionItem: List<CollectionItem>) {
@@ -53,7 +52,7 @@ class CollectionFragment : Fragment() {
         }
     }
 
-    fun List<AvCollection.Response.Collection>.toCollectionItem() : List<CollectionItem> {
+    fun List<AvCollection.Response.Collection>.toCollectionItem(): List<CollectionItem> {
         return this.map {
             CollectionItem(it)
         }

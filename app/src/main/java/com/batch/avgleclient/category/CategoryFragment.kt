@@ -2,13 +2,13 @@ package com.batch.avgleclient.category
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.net.toUri
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.batch.avgleclient.R
 import com.batch.avgleclient.model.AvCategory
@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_category.*
 
 class CategoryFragment : Fragment(), CategoryListController.ClickListener {
 
-    private lateinit var viewModel: CategoryViewModel
+    private val viewModel: CategoryViewModel by viewModels()
     private val controller by lazy { CategoryListController(this) }
 
     override fun onCreateView(
@@ -29,7 +29,6 @@ class CategoryFragment : Fragment(), CategoryListController.ClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(CategoryViewModel::class.java)
         viewModel.refresh()
         categories_list.apply {
             layoutManager = LinearLayoutManager(context)
@@ -39,20 +38,21 @@ class CategoryFragment : Fragment(), CategoryListController.ClickListener {
     }
 
     private fun observeViewModel() {
-        viewModel.categories.observe(this, Observer { categories ->
+        viewModel.categories.observe(viewLifecycleOwner) { categories ->
             categories?.let {
                 categories_list.visibility = View.VISIBLE
                 controller.setData(categories)
             }
-        })
-        viewModel.loading.observe(this, Observer { isLoading ->
+        }
+
+        viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
             isLoading?.let {
-                loading_view.visibility = if(it) View.VISIBLE else View.GONE
+                loading_view.visibility = if (it) View.VISIBLE else View.GONE
                 if (it) {
                     categories_list.visibility = View.GONE
                 }
             }
-        })
+        }
     }
 
     override fun itemClickListener(item: AvCategory.Response.Category) {

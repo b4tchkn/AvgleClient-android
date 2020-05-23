@@ -47,6 +47,7 @@ def groupieVersion = '2.7.0'
 def roomVersion = '2.1.0-rc01'
 def epoxyVersion = '3.8.0'
 def pagingVersion = '2.1.0'
+def lifecycleVersion = '2.2.0'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -76,7 +77,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
 
     //  lifecycle
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-core-ktx:$lifecycleVersion"
 
     // navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"

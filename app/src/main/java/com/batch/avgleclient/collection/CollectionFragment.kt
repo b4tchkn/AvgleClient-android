@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.GridLayoutManager
 import com.batch.avgleclient.R
+import com.batch.avgleclient.databinding.FragmentCollectionBinding
 import com.batch.avgleclient.model.AvCollection
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -17,12 +18,15 @@ import kotlinx.android.synthetic.main.fragment_collection.*
 class CollectionFragment : Fragment() {
 
     private val viewModel: CollectionViewModel by viewModels()
+    private lateinit var binding: FragmentCollectionBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_collection, container, false)
+        val view = inflater.inflate(R.layout.fragment_collection, container, false)
+        binding = FragmentCollectionBinding.bind(view)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,7 +56,7 @@ class CollectionFragment : Fragment() {
         }
     }
 
-    fun List<AvCollection.Response.Collection>.toCollectionItem(): List<CollectionItem> {
+    private fun List<AvCollection.Response.Collection>.toCollectionItem(): List<CollectionItem> {
         return this.map {
             CollectionItem(it)
         }

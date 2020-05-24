@@ -4,7 +4,6 @@ import com.batch.avgleclient.R
 import com.batch.avgleclient.databinding.ItemCollectionBinding
 import com.batch.avgleclient.model.AvCollection
 import com.xwray.groupie.databinding.BindableItem
-import timber.log.Timber
 
 class CollectionItem(private val collection: AvCollection.Response.Collection) :
     BindableItem<ItemCollectionBinding>() {
@@ -23,10 +22,6 @@ class CollectionItem(private val collection: AvCollection.Response.Collection) :
             }
         } else {
             viewBinding.totalViews = totalViewsNumber.toString()
-        }
-
-        viewBinding.collectionCardItem.setOnClickListener {
-            Timber.d("oされたあああああああああああ${collection.title}")
         }
     }
 

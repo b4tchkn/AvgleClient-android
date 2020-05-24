@@ -14,7 +14,6 @@ import com.xwray.groupie.Group
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.groupiex.plusAssign
-import kotlinx.android.synthetic.main.fragment_collection.*
 
 class CollectionFragment : Fragment() {
 
@@ -33,15 +32,16 @@ class CollectionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewModel.fetchFromRemote(1)
 
-        collection_list.apply {
+        binding.collectionList.apply {
             adapter = this@CollectionFragment.adapter
-            layoutManager = GridLayoutManager(context, 2)
+            layoutManager = GridLayoutManager(requireContext(), 2)
         }
 
         adapter.apply {
-            // Itemタップ時の動作
+            viewModel.onItemClickListener()
         }
 
         viewModel.collections.observe(viewLifecycleOwner) { list ->

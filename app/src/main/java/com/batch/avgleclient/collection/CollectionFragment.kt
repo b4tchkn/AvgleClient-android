@@ -10,15 +10,17 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.GridLayoutManager
 import com.batch.avgleclient.R
 import com.batch.avgleclient.databinding.FragmentCollectionBinding
-import com.batch.avgleclient.model.AvCollection
+import com.xwray.groupie.Group
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
+import com.xwray.groupie.groupiex.plusAssign
 import kotlinx.android.synthetic.main.fragment_collection.*
 
 class CollectionFragment : Fragment() {
 
     private val viewModel: CollectionViewModel by viewModels()
     private lateinit var binding: FragmentCollectionBinding
+    private val adapter = GroupAdapter<GroupieViewHolder>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,33 +34,23 @@ class CollectionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.fetchFromRemote(1)
-        observeViewModel()
-    }
 
-    private fun observeViewModel() {
-        viewModel.collections.observe(viewLifecycleOwner) {
-            initRecyclerView(it.toCollectionItem())
-        }
-    }
-
-    private fun initRecyclerView(collectionItem: List<CollectionItem>) {
-        val cAdapter = GroupAdapter<GroupieViewHolder>().apply {
-            // grid 2列にする
-            spanCount = 2
-            addAll(collectionItem)
-        }
         collection_list.apply {
-            layoutManager = GridLayoutManager(context, cAdapter.spanCount).apply {
-                spanSizeLookup = cAdapter.spanSizeLookup
-            }
-            setHasFixedSize(true)
-            adapter = cAdapter
+            adapter = this@CollectionFragment.adapter
+            layoutManager = GridLayoutManager(context, 2)
         }
-    }
 
-    private fun List<AvCollection.Response.Collection>.toCollectionItem(): List<CollectionItem> {
-        return this.map {
-            CollectionItem(it)
+        adapter.apply {
+            // Itemタップ時の動作
+        }
+
+        viewModel.collections.observe(viewLifecycleOwner) { list ->
+            val groupList = mutableListOf<Group>()
+            adapter += groupList
+            list.forEach {
+                groupList.add(CollectionItem(collection = it))
+            }
+            adapter.update(groupList)
         }
     }
 }

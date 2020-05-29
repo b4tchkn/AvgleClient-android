@@ -6,11 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import com.batch.avgleclient.R
 import com.batch.avgleclient.model.AvCollection
 import com.batch.avgleclient.repository.AvRepository
-import com.xwray.groupie.OnItemClickListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class CollectionViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -26,9 +24,5 @@ class CollectionViewModel(application: Application) : AndroidViewModel(applicati
                 e.stackTrace
             }
         }
-    }
-
-    fun onItemClickListener() = OnItemClickListener { item, view ->
-        Timber.d("おされた")
     }
 }

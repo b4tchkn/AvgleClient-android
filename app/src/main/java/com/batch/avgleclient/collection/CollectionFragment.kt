@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
@@ -13,6 +14,7 @@ import com.batch.avgleclient.databinding.FragmentCollectionBinding
 import com.xwray.groupie.Group
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
+import com.xwray.groupie.OnItemClickListener
 import com.xwray.groupie.groupiex.plusAssign
 
 class CollectionFragment : Fragment() {
@@ -41,7 +43,7 @@ class CollectionFragment : Fragment() {
         }
 
         adapter.apply {
-            viewModel.onItemClickListener()
+            setOnItemClickListener(onItemClickListener())
         }
 
         viewModel.collections.observe(viewLifecycleOwner) { list ->
@@ -52,5 +54,11 @@ class CollectionFragment : Fragment() {
             }
             adapter.update(groupList)
         }
+    }
+
+    private fun onItemClickListener() = OnItemClickListener { item, _ ->
+        val index = adapter.getAdapterPosition(item)
+        val collection = viewModel.collections.value?.get(index)
+        Toast.makeText(context, "$collection", Toast.LENGTH_SHORT).show()
     }
 }

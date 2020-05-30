@@ -34,7 +34,7 @@ class VideoListController(private val callback: ClickListener) :
                 video(it)
             }
             itemClickListener(View.OnClickListener { callback.itemClickListener(video()) })
-            moreClickListener(View.OnClickListener { callback.moreClickListener(video()) })
+            watchLaterClickListener(View.OnClickListener { callback.moreClickListener(video()) })
         }
     }
 

@@ -2,8 +2,9 @@ package com.batch.avgleclient.home
 
 
 import android.os.Bundle
-import android.view.*
-import android.widget.PopupMenu
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.net.toUri
@@ -14,7 +15,6 @@ import com.batch.avgleclient.R
 import com.batch.avgleclient.databinding.FragmentHomeBinding
 import com.batch.avgleclient.model.AvVideo
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.item_video.*
 
 class HomeFragment : Fragment(), VideoListController.ClickListener {
 
@@ -77,61 +77,6 @@ class HomeFragment : Fragment(), VideoListController.ClickListener {
     }
 
     override fun moreClickListener(item: AvVideo.Response.Video) {
-//        val menuBuilder = MenuBuilder(requireContext())
-//        val inflater = MenuInflater(requireContext())
-//        inflater.inflate(R.menu.video_menu, menuBuilder)
-//        val optionMenu = MenuPopupHelper(requireContext(), menuBuilder)
-//        optionMenu.setForceShowIcon(true)
-//        menuBuilder.setCallback {
-//
-//        }
-
-        Toast.makeText(requireContext(), item.title, Toast.LENGTH_SHORT).show()
-        val backgroundColor = ContextThemeWrapper(requireContext(), R.style.PopupMenu)
-//        val popup = PopupMenu(backgroundColor, button_more)
-        val popup = PopupMenu(backgroundColor, button_more)
-        popup.inflate(R.menu.video_menu)
-        popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item: MenuItem? ->
-            when (item?.itemId) {
-                R.id.watchlater -> {
-                }
-                R.id.playlist -> {
-                }
-            }
-            true
-        })
-        popup.show()
-
-//        popup.menuInflater.inflate(R.menu.video_menu, popup.menu)
-//        popup.setOnMenuItemClickListener { item ->
-//            val user = auth.currentUser
-//            when (item.itemId) {
-//                R.id.watchlater -> {
-//                    if (user != null) {
-//                        Toast.makeText(
-//                            requireContext(),
-//                            "Save to Watch later: ${user?.uid}",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                    } else {
-//                        val intent = LoginActivity.createIntent(requireActivity())
-//                        startActivity(intent)
-//                    }
-//                }
-//                R.id.playlist -> {
-//                    if (user != null) {
-//                        Toast.makeText(
-//                            requireContext(),
-//                            "Save to playlist: $user",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                    } else {
-//                        val intent = LoginActivity.createIntent(requireActivity())
-//                        startActivity(intent)
-//                    }
-//                }
-//            }
-//            true
-//        }
+        Toast.makeText(requireContext(), "${item.title}\nを後で見るに追加", Toast.LENGTH_SHORT).show()
     }
 }

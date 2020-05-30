@@ -12,8 +12,9 @@
         <variable
             name="itemClickListener"
             type="android.view.View.OnClickListener" />
+
         <variable
-            name="moreClickListener"
+            name="watchLaterClickListener"
             type="android.view.View.OnClickListener" />
     </data>
 
@@ -46,7 +47,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right|bottom"
+                android:layout_gravity="end|bottom"
                 android:layout_margin="8dp"
                 android:background="@drawable/rounded_corner_text_view"
                 android:paddingLeft="4dp"
@@ -64,12 +65,14 @@
             android:padding="8dp"
             android:layout_marginBottom="16dp"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@{video.title}"
                     android:textColor="#FFFFFF"
@@ -79,16 +82,16 @@
                     android:textStyle="bold"
                     android:layout_weight="1"
                     tools:text="SSNI-647 橋本ありな - 一ヶ月間の禁欲の果てに彼女の親友と僕が浮気SEXだけに没頭した彼女不在の2日間。" />
+
                 <ImageButton
-                    android:id="@+id/button_more"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:scaleType="centerInside"
                     android:tint="@color/colorSubText"
                     android:background="@null"
-                    android:onClick="@{moreClickListener}"
+                    android:onClick="@{watchLaterClickListener}"
                     android:foreground="@drawable/ripple_rounded_corners"
-                    android:src="@drawable/ic_more_vert"/>
+                    android:src="@drawable/ic_access_time" />
             </LinearLayout>
 
             <TextView
@@ -137,7 +140,7 @@
                         android:layout_height="15dp"
                         android:src="@drawable/ic_favorite"
                         android:tint="@color/colorSubText"
-                        android:layout_marginEnd="5dp"/>
+                        android:layout_marginEnd="5dp" />
 
                     <TextView
                         android:layout_width="wrap_content"

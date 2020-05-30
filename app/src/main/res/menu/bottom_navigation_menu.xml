@@ -5,7 +5,7 @@
         android:icon="@drawable/ic_home"/>
     <item android:title="@string/category"
         android:id="@+id/navigation_explore"
-        android:icon="@drawable/ic_view_agenda"/>
+        android:icon="@drawable/ic_baseline_explore"/>
     <item android:title="@string/collection"
         android:id="@+id/navigation_collection"
         android:icon="@drawable/ic_widgets"/>

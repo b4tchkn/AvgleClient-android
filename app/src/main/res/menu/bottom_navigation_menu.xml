@@ -4,7 +4,7 @@
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home"/>
     <item android:title="@string/category"
-        android:id="@+id/navigation_category"
+        android:id="@+id/navigation_explore"
         android:icon="@drawable/ic_view_agenda"/>
     <item android:title="@string/collection"
         android:id="@+id/navigation_collection"

@@ -9,18 +9,15 @@
         android:id="@+id/navigation_home"
         android:name="com.batch.avgleclient.home.HomeFragment"
         android:label="@string/home"
-        tools:layout="@layout/fragment_home">
-    </fragment>
+        tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/navigation_category"
-        android:name="com.batch.avgleclient.category.CategoryFragment"
+        android:id="@+id/navigation_explore"
+        android:name="com.batch.avgleclient.explore.ExploreFragment"
         android:label="@string/category"
-        tools:layout="@layout/fragment_category">
-    </fragment>
+        tools:layout="@layout/fragment_explore" />
     <fragment
         android:id="@+id/navigation_collection"
         android:name="com.batch.avgleclient.collection.CollectionFragment"
         android:label="@string/collection"
-        tools:layout="@layout/fragment_collection">
-    </fragment>
+        tools:layout="@layout/fragment_collection" />
 </navigation>

@@ -10,7 +10,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-class AvRepository constructor(baseURL: String) : AvgleApi {
+class AvRepository : AvgleApi {
     private val okHttp = OkHttpClient()
         .newBuilder()
         .addNetworkInterceptor(StethoInterceptor())
@@ -18,7 +18,7 @@ class AvRepository constructor(baseURL: String) : AvgleApi {
 
     private val apiClient = Retrofit.Builder()
         .client(okHttp)
-        .baseUrl(baseURL)
+        .baseUrl("https://api.avgle.com/v1/")
         .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().build()))
         .build()
         .create(AvgleApi::class.java)

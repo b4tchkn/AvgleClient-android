@@ -3,7 +3,6 @@ package com.batch.avgleclient.category
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.batch.avgleclient.R
 import com.batch.avgleclient.model.AvCategory
 import com.batch.avgleclient.model.AvCategoryDatabase
 import com.batch.avgleclient.repository.AvRepository
@@ -18,7 +17,7 @@ class CategoryViewModel(application: Application) : AndroidViewModel(application
     val loading = MutableLiveData<Boolean>()
     private var refreshTime = 5 * 60 * 1000 * 1000 * 1000L
     private var prefHelper = SharedPreferencesHelper(getApplication())
-    private val api = AvRepository(application.applicationContext.getString(R.string.API_AVGLE_URL))
+    private val api = AvRepository()
     private val scope = CoroutineScope(Dispatchers.Main)
 
     fun refresh() {
@@ -46,7 +45,8 @@ class CategoryViewModel(application: Application) : AndroidViewModel(application
     private fun fetchFromDatabase() {
         loading.value = true
         scope.launch {
-            val avCategories = AvCategoryDatabase(getApplication()).avCategoryDao().getAllCategories()
+            val avCategories =
+                AvCategoryDatabase(getApplication()).avCategoryDao().getAllCategories()
             categoriesRetrieved(avCategories)
         }
     }
